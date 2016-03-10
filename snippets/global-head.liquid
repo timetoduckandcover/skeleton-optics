@@ -15,7 +15,10 @@
 
   {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
   {{ 'style.scss.css' | asset_url | stylesheet_tag }}
-  {{ 'jquery.js' | asset_url | script_tag }}
+  <script src="{{ 'jquery.js' | asset_url }}"></script>
+  <script src="{{ 'jquery.flexslider.js' | asset_url }}" async></script>
+  <script src="{{ 'jquery.fitvids.js' | asset_url }}" async></script>
+
 
  <!--  {{ 'flexslider.css' | asset_url | stylesheet_tag }} -->
 

@@ -1,8 +1,5 @@
 jQuery( document ).ready(function($) {
 
-  // Launch flexslider
-  // $('.flexslider').flexslider();
-
   // Replace images on product pages
   var $main_image = $('.product-photo-container img'),
       $thumbnail  = $('.product-photo-thumb a');
@@ -53,5 +50,11 @@ jQuery( document ).ready(function($) {
     //$('.currencies-hide').hide();
     // $('#selected-currency').text(activeCurrency);
   });
+
+  // Libs
+  $('.flexslider').flexslider({
+    animation: 'slide'
+  });
+  $('.responsive-video').fitVids();
 
 });

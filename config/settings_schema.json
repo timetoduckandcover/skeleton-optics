@@ -32,13 +32,28 @@
     "settings": [
       {
         "type": "image",
+        "id": "home_hero.jpg",
+        "label": "Home Hero Image"
+      },
+      {
+        "type": "text",
+        "id": "home_hero-title",
+        "label": "Home Hero Title"
+      },
+      {
+        "type": "text",
+        "id": "home_hero-subtitle",
+        "label": "Home Hero Subtitle"
+      },
+      {
+        "type": "image",
         "id": "home_banner1.jpg",
-        "label": "Home Banner 1"
+        "label": "Home Banner Image 1"
       },
       {
         "type": "image",
         "id": "home_banner2.jpg",
-        "label": "Home Banner 2"
+        "label": "Home Banner Image 2"
       },
       {
         "type": "textarea",
@@ -48,222 +63,107 @@
       {
         "type": "image",
         "id": "home_banner3.jpg",
-        "label": "Home Banner 3"
+        "label": "Home Banner Image 3"
+      },
+      {
+        "type": "text",
+        "id": "home_social-youtube-source",
+        "label": "Youtube Video Embed Code"
       }
     ]
   },
   {
-    "name": "Homepage Promos",
+    "name": "Homepage Promo Boxes",
     "settings": [
       {
         "type": "image",
-        "id": "home_promo_left.jpg",
-        "label": "Home promo left"
+        "id": "home_promo-1.jpg",
+        "label": "Home Promo 1 Image"
       },
       {
         "type": "text",
-        "id": "home_promo_left_title",
-        "label": "Home promo left title"
-      },
-      {
-        "type": "image",
-        "id": "home_promo_right.jpg",
-        "label": "Home promo right"
-      },
-      {
-        "type": "text",
-        "id": "home_promo_right_title",
-        "label": "Home promo right title"
-      }
-    ]
-  },
-  {
-    "name": "Sale Banner",
-    "settings": [
-      {
-        "type": "image",
-        "id": "home_banner.jpg",
-        "label": "Sale banner"
-      }
-    ]
-  },
-  {
-    "name": "Sale Page Layout",
-    "settings": [
-      {
-        "type": "text",
-        "id": "home_layout_1_text",
-        "label": "Sale layout text 1"
-      },
-      {
-        "type": "image",
-        "id": "home_layout_1.jpg",
-        "label": "Sale layout 1 image"
-      },
-      {
-        "type": "text",
-        "id": "home_layout_1_link",
-        "label": "Sale layout 1 URL"
-      },
-      {
-        "type": "text",
-        "id": "home_layout_2_text",
-        "label": "Sale layout text 2"
-      },
-      {
-        "type": "image",
-        "id": "home_layout_2.jpg",
-        "label": "Sale layout 2 image"
-      },
-      {
-        "type": "text",
-        "id": "home_layout_2_link",
-        "label": "Sale layout 2 URL"
-      },
-      {
-        "type": "text",
-        "id": "home_layout_3_text",
-        "label": "Sale layout text 3"
-      },
-      {
-        "type": "image",
-        "id": "home_layout_3.jpg",
-        "label": "Sale layout 3 image"
-      },
-      {
-        "type": "text",
-        "id": "home_layout_3_link",
-        "label": "Sale layout 3 URL"
-      },
-      {
-        "type": "text",
-        "id": "home_layout_4_text",
-        "label": "Sale layout text 4"
-      },
-      {
-        "type": "image",
-        "id": "home_layout_4.jpg",
-        "label": "Sale layout 4 image"
-      },
-      {
-        "type": "text",
-        "id": "home_layout_4_link",
-        "label": "Sale layout 4 URL"
-      },
-      {
-        "type": "text",
-        "id": "home_layout_5_text",
-        "label": "Sale layout text 5"
-      },
-      {
-        "type": "image",
-        "id": "home_layout_5.jpg",
-        "label": "Sale layout 5 image"
-      },
-      {
-        "type": "text",
-        "id": "home_layout_5_link",
-        "label": "Sale layout 5 URL"
-      },
-      {
-        "type": "text",
-        "id": "home_layout_6_text",
-        "label": "Sale layout text 6"
-      },
-      {
-        "type": "image",
-        "id": "home_layout_6.jpg",
-        "label": "Sale layout 6 image"
-      },
-      {
-        "type": "text",
-        "id": "home_layout_6_link",
-        "label": "Sale layout 6 URL"
-      }
-    ]
-  },
-  {
-    "name": "Promo Banners",
-    "settings": [
-      {
-        "type": "image",
-        "id": "promo_banner_1.jpg",
-        "label": "Promo banner 1"
-      },
-      {
-        "type": "text",
-        "id": "promo_banner_1_title",
-        "label": "Promo banner 1 Title"
-      },
-      {
-        "type": "text",
-        "id": "promo_banner_1_link",
-        "label": "Promo banner 1 Link"
-      },
-      {
-        "type": "image",
-        "id": "promo_banner_2.jpg",
-        "label": "Promo banner 2"
-      },
-      {
-        "type": "text",
-        "id": "promo_banner_2_title",
-        "label": "Promo banner 2 Title"
-      },
-      {
-        "type": "text",
-        "id": "promo_banner_2_link",
-        "label": "Promo banner 2 Link"
-      },
-      {
-        "type": "image",
-        "id": "promo_banner_3.jpg",
-        "label": "Promo banner 3"
-      },
-      {
-        "type": "text",
-        "id": "promo_banner_3_title",
-        "label": "Promo banner 3 Title"
-      },
-      {
-        "type": "text",
-        "id": "promo_banner_3_link",
-        "label": "Promo banner 3 Link"
-      }
-    ]
-  },
-  {
-    "name": "Promo message",
-    "settings": [
-      {
-        "type": "text",
-        "id": "promo_msg",
-        "label": "Promo message"
-      }
-    ]
-  },
-  {
-    "name": "Product page",
-    "settings": [
-      {
-        "type": "image",
-        "id": "product_img.jpg",
-        "label": "Product image"
+        "id": "home_promo-title-1",
+        "label": "Home promo 1 Title"
       },
       {
         "type": "textarea",
-        "id": "product_description",
-        "label": "Product image"
-      }
-    ]
-  },
-  {
-    "name": "Doing good",
-    "settings": [
+        "id": "home_promo-copy-1",
+        "label": "Home promo 1 Copy"
+      },
       {
         "type": "image",
-        "id": "doing_good.jpg",
-        "label": "Doing Good"
+        "id": "home_promo-2.jpg",
+        "label": "Home Promo 2 Image"
+      },
+      {
+        "type": "text",
+        "id": "home_promo-title-2",
+        "label": "Home promo 2 Title"
+      },
+      {
+        "type": "textarea",
+        "id": "home_promo-copy-2",
+        "label": "Home promo 2 Copy"
+      },
+      {
+        "type": "image",
+        "id": "home_promo-3.jpg",
+        "label": "Home Promo 3 Image"
+      },
+      {
+        "type": "text",
+        "id": "home_promo-title-3",
+        "label": "Home promo 3 Title"
+      },
+      {
+        "type": "textarea",
+        "id": "home_promo-copy-3",
+        "label": "Home promo 3 Copy"
+      },
+      {
+        "type": "image",
+        "id": "home_promo-4.jpg",
+        "label": "Home Promo 4 Image"
+      },
+      {
+        "type": "text",
+        "id": "home_promo-title-4",
+        "label": "Home promo 4 Title"
+      },
+      {
+        "type": "textarea",
+        "id": "home_promo-copy-4",
+        "label": "Home promo 4 Copy"
+      },
+      {
+        "type": "image",
+        "id": "home_promo-5.jpg",
+        "label": "Home Promo 5 Image"
+      },
+      {
+        "type": "text",
+        "id": "home_promo-title-5",
+        "label": "Home promo 5 Title"
+      },
+      {
+        "type": "textarea",
+        "id": "home_promo-copy-5",
+        "label": "Home promo 5 Copy"
+      },
+      {
+        "type": "image",
+        "id": "home_promo-6.jpg",
+        "label": "Home Promo 6 Image"
+      },
+      {
+        "type": "text",
+        "id": "home_promo-title-6",
+        "label": "Home promo 6 Title"
+      },
+      {
+        "type": "textarea",
+        "id": "home_promo-copy-6",
+        "label": "Home promo 6 Copy"
       }
     ]
   },

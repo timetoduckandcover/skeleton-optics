@@ -31,6 +31,22 @@ $baseline: 20px;
   font-size: ($size/16) + em;
   line-height: ($size * 1.4) + px;
 };
+@mixin centre($axis: "both") {
+	position:absolute;
+	@if $axis == "y"{
+		top:50%;
+    transform: translate(0, -50%);
+	}
+	@if $axis == "x"{
+		left:50%;
+		transform: translate(-50%, 0);
+	}
+	@if $axis == "both"{
+		top:50%;
+		left:50%;
+		transform: translate(-50%, -50%);
+	}
+}
 
 /*------- Necessary Styles --------*/
 *, *:before, *:after {
@@ -93,6 +109,7 @@ body, input, textarea, select, button {
 .mt {margin-top: $baseline;}
 .mtt {margin-top: $baseline*2;}
 .uppercase {text-transform:uppercase;}
+.section-padding {padding: 40px 0;}
 .center {
     position: absolute;
     left: 50%;
@@ -117,6 +134,9 @@ body, input, textarea, select, button {
 }
 
 /*------- Typography --------*/
+h1,h2,h3,h4,h5,h6,p {
+  margin-bottom: 12px;
+}
 h1 {
   @include font(34);
 }
@@ -140,18 +160,13 @@ small {
   padding: 0 135px;
   display: block;
 }
-p { padding-bottom: $baseline/2; }
 strong { font-weight: bold; }
 em { font-style: italic; }
 
-
 /*------- Links --------*/
 a {
-    text-decoration: none;
-    color: $col-links-primary;
-    @include transition;
-    &:hover { color: $col-links-secondary;}
-    &.underline {text-decoration: underline;}
+  text-decoration: underline;
+  @include transition;
 }
 
 
@@ -334,6 +349,47 @@ main.global-site {
 
 /* Home Page */
 #home {
+  .home_hero {
+    position: relative;
+    .caption {
+      text-align: center;
+      @include centre;
+      h1, span {
+        color: $col-white;
+      }
+      h1 {
+        @include font(40);
+        position: relative;
+        padding-bottom: 30px;
+        margin-bottom: 30px;
+        &:after {
+          content: '';
+          width: 80px;
+          height: 5px;
+          background: $col-white;
+          @include centre(x);
+          bottom: 0;
+        }
+      }
+      span {
+        @include font(20);
+      }
+    }
+  }
+  .home_slider-area {
+    .slides {
+      li {
+        ul {
+          li {
+            text-align: center;
+            .home_slider-area-slide {
+              padding: 0 20px;
+            }
+          }
+        }
+      }
+    }
+  }
   .home_promo-text {
     max-width: 600px;
     margin: 100px auto;
@@ -341,6 +397,8 @@ main.global-site {
   }
   .home_collection {
 
+  }
+  .home_social-area {
   }
 }
 
@@ -517,9 +575,11 @@ main.global-site {
 /* FOOTER */
 footer.global-footer {
   width: 100%;
-  border-top: 10px solid $col-links-primary;
   background: $col-black;
   padding: $baseline $baseline*3;
+  a {
+    color: $col-grey;
+  }
 }
 
 /* SOCIAL ICONS */

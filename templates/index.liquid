@@ -1,5 +1,60 @@
 <div id="home">
   {{ page.content }}
+  <div class="full-page-banner home_hero">
+    <img src="{{ 'home_hero.jpg' | asset_url }}" alt="Home Hero" class="img-full" />
+    <div class="caption">
+      <h1 class="uppercase">{{ settings.home_hero-title }}</h1>
+      <span class="uppercase">{{ settings.home_hero-subtitle }}</span>
+    </div>
+  </div>
+  <div class="wrapper">
+    <div class="home_slider-area section-padding">
+      <div class="flexslider">
+        <ul class="slides">
+          <li>
+            <ul class="row">
+              {% for i in (1..3) %}
+                {% capture img %}home_promo-{{i}}.jpg{% endcapture %}
+                {% capture title %}home_promo-title-{{i}}{% endcapture %}
+                {% capture copy %}home_promo-copy-{{i}}{% endcapture %}
+                <li class="col-xs-12 col-sm-4">
+                  <div class="home_slider-area-slide">
+                    <img src="{{ img | asset_url }}" alt="" class="img-full" />
+                    {% if settings[title] %}
+                      <h2>{{ settings[title] }}</h2>
+                    {% endif %}
+                    {% if settings[copy] %}
+                      <p>{{ settings[copy] }}</p>
+                    {% endif %}
+                  </div>
+                </li>
+              {% endfor %}
+            </ul>
+          </li>
+          <li>
+            <ul class="row">
+              {% for i in (4..6) %}
+                {% capture img %}home_promo-{{i}}.jpg{% endcapture %}
+                {% capture title %}home_promo-title-{{i}}{% endcapture %}
+                {% capture copy %}home_promo-copy-{{i}}{% endcapture %}
+                <li class="col-xs-12 col-sm-4">
+                  <div class="home_slider-area-slide">
+                    <img src="{{ img | asset_url }}" alt="" class="img-full" />
+                    {% if settings[title] %}
+                      <h2>{{ settings[title] }}</h2>
+                    {% endif %}
+                    {% if settings[copy] %}
+                      <p>{{ settings[copy] }}</p>
+                    {% endif %}
+                  </div>
+                </li>
+              {% endfor %}
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
   <div class="full-page-banner">
     <img src="{{ 'home_banner1.jpg' | asset_url }}" alt="Home Banner 1" class="img-full" />
   </div>
@@ -10,7 +65,7 @@
     <img src="{{ 'home_banner2.jpg' | asset_url }}" alt="Home Banner 1" class="img-full" />
   </div>
   <div class="wrapper">
-    <div class="home_collection">
+    <div class="home_collection section-padding">
       {% for product in collections.frontpage.products %}
         <p>ID: {{ product.id }}</p>
         <p>TITLE: {{ product.title }}</p>
@@ -20,6 +75,19 @@
   </div>
   <div class="full-page-banner">
     <img src="{{ 'home_banner3.jpg' | asset_url }}" alt="Home Banner 1" class="img-full" />
+  </div>
+  <div class="wrapper">
+    <div class="home_social-area section-padding">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6">
+          <h2 class="uppercase">Instagram</h2>
+        </div>
+        <div class="col-xs-12 col-sm-6 responsive-video">
+          <h2 class="uppercase">Youtube</h2>
+          {{ settings.home_social-youtube-source }}
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
