@@ -1,0 +1,38 @@
+<div id="sidebar">
+  {% if current_tags %}
+  <div class="filter tags selected-filters">
+    <h3>Filters</h3>
+    <!--<div class="nano-tags">-->
+    <ul class="filter-tags"> <!-- nano-content -->
+      {% for tag in collection.all_tags %}
+      {% if current_tags contains tag %}
+      <li class="active">{{ tag | link_to_remove_tag: tag }}</li>
+      {% endif %}
+      {% endfor %}
+    </ul>
+    <!--</div>-->
+  </div>
+  {% endif %}
+  <!-- Filter By Size -->
+
+  {% for i in (1..6) %}
+  {% capture include_filter %}include_filter_no_{{ i }}{% endcapture %}
+  <!--{{ include_filter }}-->
+  {% if settings[include_filter] %}
+  {% capture filter_label %}filter_no_{{ i }}_label{% endcapture %}
+  <div class="filterbox">
+    <h3>{{ settings[filter_label] }}</h3>
+    <div class="filter tags {{ settings[filter_label] }} clearfix" id="filter-{{ i }}">
+      <!--<div class="nano-tags">-->
+      <ul class="filter-tags"> <!-- nano-content -->
+        {% capture filter_linklist %}filter_no_{{ i }}_linklist{% endcapture %}
+        {% include 'filter-by-tag' with settings[filter_linklist] %}
+      </ul>
+      <!--</div>-->
+    </div>
+    <div style="clear:both"></div>
+  </div>
+  {% endif %}
+  {% endfor %}
+  <!-- End Filter by size -->
+</div>

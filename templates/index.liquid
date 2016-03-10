@@ -1,0 +1,43 @@
+<div id="home">
+  {{ page.content }}
+  <div class="full-page-banner">
+    <img src="{{ 'home_banner1.jpg' | asset_url }}" alt="Home Banner 1" class="img-full" />
+  </div>
+  <div class="home_promo-text text-center">
+    <h2>{{ settings.home_promo-text1 }}</h2>
+  </div>
+  <div class="full-page-banner">
+    <img src="{{ 'home_banner2.jpg' | asset_url }}" alt="Home Banner 1" class="img-full" />
+  </div>
+  <div class="wrapper">
+    <div class="home_collection">
+      {% for product in collections.frontpage.products %}
+        <p>ID: {{ product.id }}</p>
+        <p>TITLE: {{ product.title }}</p>
+        <img src="{{ product.featured_image | product_img_url: master }}" alt="" />
+      {% endfor %}
+    </div>
+  </div>
+  <div class="full-page-banner">
+    <img src="{{ 'home_banner3.jpg' | asset_url }}" alt="Home Banner 1" class="img-full" />
+  </div>
+</div>
+
+<script>
+
+</script>
+
+{% unless settings.frontpage == blank or collections[settings.frontpage].empty? %}
+{% assign collection = collections[settings.frontpage] %}
+<ul class="row">
+{% for product in collection.products %}
+  {% include 'product-grid-item' %}
+{% else %}
+<li>
+  <p>
+    You have no products in your {{ collections[settings.frontpage].title }} collection.
+  <p>
+</li>
+{% endfor %}
+</ul>
+{% endunless %}

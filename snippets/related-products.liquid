@@ -1,0 +1,29 @@
+{% assign image_size = 'large' %}
+{% assign heading = 'Trending now on 1stparents' %}
+
+{% if product.tags.size > 0 %}
+<div class="related-products inline">
+  <h2>{{ heading }}</h2>
+  <ul class="row"></ul>
+</div>
+<script>!window.jQuery && document.write('<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"><\/script>')</script>
+{{ 'api.jquery.js' | shopify_asset_url | script_tag }}
+
+<script type="text/javascript" charset="utf-8">
+//<![CDATA[
+  var recommendations = [];
+  {% for tag in product.tags %}
+  recommendations.push('{{ tag | handle }}');
+  {% endfor %}
+  if (recommendations.length) {
+    var list = jQuery('.related-products ul.row');
+    for (var i=0; i<recommendations.length; i++) {
+      jQuery.getJSON(recommendations[i] + '.js', function(product) {
+        list.append('<li class="col-sm-2"><div class="image"><a href="' + product.url +'"><img src="' + product.images[0].replace(/(\.jpg|\.png|\.jpeg|\.gif)/, '_{{ image_size }}$1') + '" class="img-full"/></a></div><h4><a href="' + product.url + '">' + product.title + '</a></h4><span class="money">' + Shopify.formatMoney(product.price, "{{ shop.money_format }}") + '</span></li>');
+      });
+    }
+  }
+//]]>
+</script>
+
+{% endif %}

@@ -1,0 +1,30 @@
+{% unless template == 'index' or template == 'cart' %}
+<div class="breadcrumbs">
+  <a href="javascript:;" onclick="history.back(-1)">&lt; Back</a>
+  <a href="/" class="homepage-link" title="Back to the frontpage">Home</a>
+  {% if template contains 'product' %}
+    {% if collection %}            
+      {% if collection.handle %}
+         {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+         {{ collection.title | link_to: url }}
+      {% endif %}
+    {% endif %}
+    <span class="page-title">{{ product.title }}</span>
+  {% elsif template contains 'collection' and collection.handle %}
+      {% if current_tags %}
+        {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+        {{ collection.title | link_to: url }}
+        <span class="page-title">{{ current_tags.first }}</span>
+      {% else %}
+        <span class="page-title">{{ collection.title }}</span>
+      {% endif %}
+  {% elsif template == 'article' %}
+      {{ blog.title | link_to: blog.url }}
+      <span class="page-title">{{ article.title }}</span>
+  {% elsif template contains 'page' %}
+     <span class="page-title">{{ page.title }}</span>
+  {% else %}
+     <span class="page-title">{{ page_title }}</span>
+  {% endif %}
+</div>
+{% endunless %}

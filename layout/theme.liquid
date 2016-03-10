@@ -1,0 +1,35 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if IE 9 ]><html class="ie9 no-js"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js"> <!--<![endif]-->
+
+<head>
+  {% include 'global-head' %}
+  {{ content_for_header }}
+</head>
+
+<body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" >
+
+  <!-- Header -->
+  {% include 'global-header' %}
+
+  <!-- Main -->
+  <main id="main" role="main" class="global-site {% if template != 'index' %}header-push{% endif %}">
+    {{ content_for_layout }}
+  </main>
+
+  <!-- Footer -->
+  {% include 'global-footer' %}
+
+  <!-- Scripts -->
+  {% include 'global-scripts' %}
+  {% include 'global-inline-scripts' %}
+
+  <!-- Add ons -->
+  <!-- {% include 'currencies' %} -->
+  <!-- currencies script is throwing a JS error - to review -->
+
+</body>
+</html>

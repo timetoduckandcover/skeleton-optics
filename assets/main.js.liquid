@@ -1,0 +1,57 @@
+jQuery( document ).ready(function($) {
+
+  // Launch flexslider
+  // $('.flexslider').flexslider();
+
+  // Replace images on product pages
+  var $main_image = $('.product-photo-container img'),
+      $thumbnail  = $('.product-photo-thumb a');
+
+  $thumbnail.on("click", function() {
+
+    var thumbnail_url = $(this).attr("href");
+    $main_image.attr("src", thumbnail_url)
+    return false;
+
+  });
+
+  // Burger menu
+  $('.burger').on("click", function() {
+     $(this).toggleClass('active');
+     $('nav').toggle();
+  });
+
+  // Add active class to product variant label on product pages
+  // var variant_label = $('#product-variants li label');
+  // $('#product-variants li:first-child').find('label').addClass('active');
+  // variant_label.on("click", function() {
+  //   variant_label.removeClass('active');
+  //   $(this).addClass('active');
+  // });
+
+  // Increment buttons on cart page
+  var $minus 	= $('.incrementors .minus'),
+      $plus  	= $('.incrementors .plus');
+  $minus.click( function() {
+    var $numinput = $(this).next('.number');
+    if ($numinput.val() > 0) {
+		$numinput.val( parseInt( $numinput.val(), 10 ) -1 );
+    }
+  });
+  $plus.click( function() {
+    var $numinput = $(this).prev('.number');
+	$numinput.val( parseInt( $numinput.val(), 10 ) +1 );
+  });
+
+  // Currency Switcher
+  var pageloadCurrency = $('.currency-select.selected').html();
+  $('#selected-currency').append(pageloadCurrency);
+  $('.currency-select').click(function() {
+    var activeCurrency = $('.currency-select.selected').html();
+    $('.currency-select').removeClass('active');
+    $(this).addClass('active');
+    //$('.currencies-hide').hide();
+    // $('#selected-currency').text(activeCurrency);
+  });
+
+});

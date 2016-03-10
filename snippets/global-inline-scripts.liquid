@@ -1,0 +1,76 @@
+
+<!-- Currency -->
+<script>
+
+// Pick your format here:
+// money_format or money_with_currency_format
+Currency.format = 'money_format';
+
+var shopCurrency = '{{ shop.currency }}';
+var cookieCurrency = Currency.cookie.read();
+
+// Fix for customer account pages.
+jQuery('span.money span.money').each(function() {
+  jQuery(this).parents('span.money').removeClass('money');
+});
+
+// Saving the current price.
+jQuery('span.money').each(function() {
+  jQuery(this).attr('data-currency-{{ shop.currency }}', jQuery(this).html());
+});
+
+// Select all your currencies buttons.
+var buttons = jQuery('#currencies span.currency-select');
+
+// If there's no cookie or it's the shop currency.
+if (cookieCurrency == null || cookieCurrency === shopCurrency) {
+  buttons.removeClass('selected');
+  jQuery('#currencies span[data-currency=' + shopCurrency + ']').addClass('selected');
+  Currency.currentCurrency = shopCurrency;
+}
+else {
+  Currency.convertAll(shopCurrency, cookieCurrency);
+  buttons.removeClass('selected');
+  jQuery('#currencies span[data-currency=' + cookieCurrency + ']').addClass('selected');
+}
+
+// When customer clicks on a currency button.
+buttons.click(function() {
+  buttons.removeClass('selected');
+  jQuery(this).addClass('selected');
+  var newCurrency =  jQuery(this).attr('data-currency');
+  Currency.convertAll(Currency.currentCurrency, newCurrency);
+   jQuery('#selected-currency1').text(jQuery(this).text());
+});
+
+// For options.
+var original_selectCallback = window.selectCallback;
+var selectCallback = function(variant, selector) {
+  original_selectCallback(variant, selector);
+  Currency.convertAll(shopCurrency, jQuery('#currencies span.currency-select.selected').attr('data-currency'));
+ jQuery('.selected-currency').text(Currency.currentCurrency);
+  jQuery('#selected-currency1').text(jQuery('.fotcur span.selected').text());
+};
+
+ jQuery('.selected-currency').text(Currency.currentCurrency);
+  jQuery('#selected-currency1').text(jQuery('.fotcur span.selected').text());
+  // jQuery('#selected-currency1').text(Currency.currentCurrency);
+
+</script>
+
+
+ <!-- Limit donations to $1 -->
+  {% unless settings.limit == 'No limit' %}
+  {{ 'jquery.limit.min.js' | asset_url | script_tag }}
+  <script type="text/javascript" charset="utf-8">
+    //<![CDATA[
+    Shopify.Cart.setProductHandle('{{ product.handle }}');
+    Shopify.Cart.limit( {
+        limitPer: '{{ settings.limit_per }}',
+        limitQuantity: {{ settings.limit_quantity }}{% if settings.limit == 'Enabled for products listed' %},
+        limitProductHandles: jQuery.trim("{{ settings.limit_product_handles }}").split(/[\s,;]+/){% endif %}{% if settings.limit_per == 'cart' and settings.limit_quantity == '1' %},
+        limitSkipCartPage: {% if settings.limit_skip_cart_page %}true{% else %}false{% endif %}{% endif %}
+        } );
+    //]]>
+  </script>
+  {% endunless %}
