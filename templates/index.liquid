@@ -13,7 +13,7 @@
         <ul class="slides">
           <li>
             <ul class="row">
-              {% for i in (1..3) %}
+              {% for i in (4..6) %}
                 {% capture img %}home_promo-{{i}}.jpg{% endcapture %}
                 {% capture title %}home_promo-title-{{i}}{% endcapture %}
                 {% capture copy %}home_promo-copy-{{i}}{% endcapture %}
@@ -21,7 +21,7 @@
                   <div class="home_slider-area-slide">
                     <img src="{{ img | asset_url }}" alt="" class="img-full" />
                     {% if settings[title] %}
-                      <h2>{{ settings[title] }}</h2>
+                      <h2 class="has-line">{{ settings[title] }}</h2>
                     {% endif %}
                     {% if settings[copy] %}
                       <p>{{ settings[copy] }}</p>
@@ -33,7 +33,7 @@
           </li>
           <li>
             <ul class="row">
-              {% for i in (4..6) %}
+              {% for i in (1..3) %}
                 {% capture img %}home_promo-{{i}}.jpg{% endcapture %}
                 {% capture title %}home_promo-title-{{i}}{% endcapture %}
                 {% capture copy %}home_promo-copy-{{i}}{% endcapture %}
@@ -41,7 +41,7 @@
                   <div class="home_slider-area-slide">
                     <img src="{{ img | asset_url }}" alt="" class="img-full" />
                     {% if settings[title] %}
-                      <h2>{{ settings[title] }}</h2>
+                      <h2 class="has-line">{{ settings[title] }}</h2>
                     {% endif %}
                     {% if settings[copy] %}
                       <p>{{ settings[copy] }}</p>
@@ -66,11 +66,16 @@
   </div>
   <div class="wrapper">
     <div class="home_collection section-padding">
-      {% for product in collections.frontpage.products %}
-        <p>ID: {{ product.id }}</p>
-        <p>TITLE: {{ product.title }}</p>
-        <img src="{{ product.featured_image | product_img_url: master }}" alt="" />
-      {% endfor %}
+      <div class="row">
+        {% for product in collections.frontpage.products %}
+          <div class="col-xs-12 col-sm-4 text-center">
+            <!-- <p>ID: {{ product.id }}</p> -->
+            <img src="{{ product.featured_image | img_url: 'master' }}" alt="" class="img-full" />
+            <h2 class="has-line">{{ product.title }}</h2>
+            <span>{{ product.price | money }}</span>
+          </div>
+        {% endfor %}
+      </div>
     </div>
   </div>
   <div class="full-page-banner">
