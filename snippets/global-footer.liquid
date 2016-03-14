@@ -1,63 +1,71 @@
+{% if template != 'cart' %}
+<div class="full-page-banner">
+  <img src="{{ 'footer_banner.jpg' | asset_url }}" alt="Home Banner 1" class="img-full" />
+</div>
+<div class="wrapper">
+  <div class="home_social-area section-padding">
+    <div class="row">
+      <div class="col-xs-12 col-sm-6">
+        <h2 class="uppercase">Instagram</h2>
+        <iframe src="https://app.socialstream.io/shopify/widget?shop=skeleton-optics.myshopify.com" width="100%" height="400" style="border: none"></iframe>
+      </div>
+      <div class="col-xs-12 col-sm-6 responsive-video">
+        <h2 class="uppercase">Youtube</h2>
+        {{ settings.home_social-youtube-source }}
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
 <!-- Site Footer -->
 <footer class="global-footer">
   <div class="wrapper">
-    <div class="row mb">
+    <div class="row">
+      <div class="col-xs-12 col-sm-3">
+        <h3>Follow</h3>
+        <ul class="social">
+          {% if settings.twitter_link %}
+          <li class="twitter">
+            <a href="{{ settings.twitter_link }}" target="_blank"></a>
+          </li>
+          {% endif %}
+          {% if settings.facebook_link %}
+          <li class="facebook">
+            <a href="{{ settings.facebook_link }}" target="_blank"></a>
+          </li>
+          {% endif %}
+          {% if settings.pinterest_link %}
+          <li class="pinterest">
+            <a href="{{ settings.pinterest_link }}" target="_blank"></a>
+          </li>
+          {% endif %}
+          {% if settings.instagram_link %}
+          <li class="instagram">
+            <a href="{{ settings.instagram_link }}" target="_blank"></a>
+          </li>
+          {% endif %}
+          {% if settings.email_link %}
+          <li class="email-link">
+            <a href="{{ settings.email_link }}" target="_blank"></a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
       {% if linklists.footer.links.size > 0 %}
-        <div class="col-xs-12 col-sm-3">
-          <h3>Shop 1st Parents</h3>
-          <ul role="navigation">
+        <div class="col-xs-12 col-sm-9">
+          <ul role="navigation" class="footer-linklist">
           {% for link in linklists.footer.links %}
             <li><a href="{{ link.url }}" title="{{ link.title }}"{% if link.active %} class="active"{% endif %}>{{ link.title }}</a></li>
           {% endfor %}
           </ul>
+          <div class="mailchimp">
+            <p>Sign up to get the latest on sales, new releases and more...</p>
+            {% include 'mailchimp' %}
+          </div>
         </div>
       {% endif %}
-      {% if linklists.information.links.size > 0 %}
-        <div class="col-xs-12 col-sm-3">
-          <h3>Information</h3>
-          <ul role="navigation">
-          {% for link in linklists.information.links %}
-            <li><a href="{{ link.url }}" title="{{ link.title }}"{% if link.active %} class="active"{% endif %}>{{ link.title }}</a></li>
-          {% endfor %}
-          </ul>
-        </div>
-      {% endif %}
-
-      <div class="col-xs-12 col-sm-4 col-sm-offset-2">
-        <h3>Get the Latest</h3>
-        <p>Sign up for our weekly newsletter, who knows, you might get something special.</p>
-        {% include 'mailchimp' %}
-      </div>
-
-
     </div>
-
-    <!-- <div class="row">
-      <div class="col-xs-12 col-sm-4 col-sm-offset-8">
-        <ul class="social">
-          <li class="facebook">
-            <a href="" target="_blank">
-              {{ 'facebook_icon_grey.png' | asset_url | img_tag: "Facebook" }}
-            </a>
-          </li>
-          <li class="twitter">
-            <a href="" target="_blank">
-              {{ 'twitter_icon_grey.png' | asset_url | img_tag: "Twitter" }}
-            </a>
-          </li>
-          <li class="pinterest">
-            <a href="" target="_blank">
-              {{ 'pinterest_icon_grey.png' | asset_url | img_tag: "Pinterest" }}
-            </a>
-          </li>
-          <li class="instagram">
-            <a href="" target="_blank">
-              {{ 'instagram_icon_grey.png' | asset_url | img_tag: "Instgram" }}
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div> -->
 
     <div class="row">
       <div class="col-xs-12 col-sm-3">

@@ -8,7 +8,7 @@ $col-beige: #fddea7;
 $col-white: #fff;
 $col-orange: #ee6321;
 $col-body: #333;
-$col-links-primary: #44C9B8;
+$col-links-primary: #ee6321;
 $col-links-secondary: #33B5A4;
 
 /* Baseline */
@@ -79,7 +79,7 @@ body {
   line-height: 1.6;
 }
 body, input, textarea, select, button {
-  font-family: 'Arial', 'Verdana', sans-serif;
+  font-family: 'Lato', 'Arial', 'Verdana', sans-serif;
   @include font(14);
 }
 .wrapper {
@@ -131,6 +131,9 @@ body, input, textarea, select, button {
   width: 100%;
   height: auto;
   display: block;
+}
+.push-header {
+  padding-top: 100px;
 }
 
 /*------- Typography --------*/
@@ -186,41 +189,45 @@ a {
 /*------- Lists --------*/
 ul { list-style: none;}
 ul li { display: block;}
-nav ul li { display: inline-block; }
+nav > ul > li { display: inline-block; }
 
 /*------- Forms --------*/
+label {
+  display: block;
+  margin-bottom: 4px;
+  color: $col-grey;
+  text-transform: uppercase;
+}
 input {
   text-decoration: none;
   @include transition;
   &:focus {outline: none;}
   &:not([type=submit]) {
     width: 100%;
-    max-width: 200px;
+    max-width: 400px;
     border: 1px solid $col-grey;
     color: $col-black;
     padding: 7px;
     @include font(16);
   }
   &[type="submit"] {
-    border: 1px solid $col-grey;
-    background: $col-grey;
+    border: none;
+    border-radius: 5px;
+    background: $col-orange;
     color: $col-white;
-    width: 143px;
-    padding: 7px;
-    display: block;
-    @include font(16);
+    padding: 7px 20px;
+    display: inline-block;
+    text-transform: uppercase;
+    @include font(15);
     &:hover { background: $col-links-primary; border: 1px solid $col-links-primary; cursor: pointer;}
-        &.add-to-cart {
-          text-transform: uppercase;
-          width: 100%;
-          max-width: 100%;
-          margin: $baseline 0;
-          background: $col-orange;
-          border: 1px solid $col-orange;
-        }
-        &.mailchimp {
-          margin-left: $baseline/2;
-        }
+    &.add-to-cart {
+      text-transform: uppercase;
+      width: 100%;
+      max-width: 100%;
+      margin: $baseline 0;
+      background: $col-orange;
+      border: 1px solid $col-orange;
+    }
   }
 }
 textarea {
@@ -324,25 +331,54 @@ header.global-header {
   }
   nav {
     float: left;
-    .nav {
-      li {
-        display: inline-block;
-        margin-right: 20px;
-        &.active a {
-          color: $col-links-primary;
-        }
-        a {
-          text-transform: uppercase;
-          display: block;
-          color: $col-white;
-          line-height: 70px;
-          &:hover {color: $col-links-primary;}
-        }
-      }
-    }
   }
   #header_meta {
     float: right;
+  }
+  .nav-links {
+    & > li {
+      display: inline-block;
+      margin-right: 20px;
+      position: relative;
+      &.active a {
+        color: $col-links-primary;
+      }
+      & > a {
+        text-transform: uppercase;
+        text-decoration: none;
+        display: block;
+        color: $col-white;
+        line-height: 70px;
+        &:hover {
+          color: $col-links-primary;
+        }
+      }
+      &:hover {
+        .sub-nav {
+          display: block;
+        }
+      }
+      .sub-nav {
+        padding: 4px 12px 12px 12px;
+        display: none;
+        position: absolute;
+        background: rgba(0,0,0,.6);
+        top: 70px;
+        left: -12px;
+        min-width: 200px;
+        li {
+          a {
+            color: $col-white;
+            text-decoration: none;
+            text-transform: uppercase;
+            line-height: 20px;
+            &:hover {
+              color: $col-links-primary;
+            }
+          }
+        }
+      }
+    }
   }
 }
 
@@ -410,8 +446,6 @@ main.global-site {
   }
   .home_collection {
 
-  }
-  .home_social-area {
   }
 }
 
@@ -526,12 +560,12 @@ main.global-site {
   }
 }
 .cart-meta {
-  border-top: 1px solid $col-grey;
-    padding: $baseline 0;
+  border-top: 1px solid lighten($col-grey, 30%);
+  padding: $baseline 0;
 }
 .cart-item {
-  border-top: 1px solid $col-grey;
-    padding: $baseline 0;
+  border-top: 1px solid lighten($col-grey, 30%);
+  padding: $baseline 0;
 }
 .checkout-btns {
   margin: $baseline/2 0;
@@ -589,24 +623,47 @@ main.global-site {
 footer.global-footer {
   width: 100%;
   background: $col-black;
-  padding: $baseline $baseline*3;
+  padding: 40px 0;
   a {
     color: $col-grey;
   }
-}
-
-/* SOCIAL ICONS */
-.social {
-  li {
-    width: 30px;
-    display: inline-block;
-    margin-right: 6px;
-    a {
-      display: block;
-      img {
-        width: 100%;
+  h3 {
+    color: $col-grey;
+    margin-bottom: 30px;
+  }
+  .footer-linklist {
+    margin-bottom: 30px;
+    text-align: right;
+    li {
+      display: inline-block;
+      margin-left: 12px;
+      a {
+        display: block;
+        text-decoration: none;
+        text-transform: uppercase;
       }
     }
+  }
+  .social {
+    li {
+      display: inline-block;
+      margin-right: 6px;
+      a {
+        background-image: url(social-icons.png);
+        background-repeat: no-repeat;
+        background-size: 260px 40px;
+        display: block;
+        width: 40px;
+        height: 40px;
+      }
+      &.facebook a {background-position: -55px 0;}
+      &.pinterest a {background-position: -110px 0;}
+      &.instagram a {background-position: -165px 0;}
+      &.email-link a {background-position: -220px 0;}
+    }
+  }
+  .mailchimp-signup {
+    float: right;
   }
 }
 

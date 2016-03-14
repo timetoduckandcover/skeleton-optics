@@ -54,16 +54,6 @@
         "type": "textarea",
         "id": "home_promo-text1",
         "label": "Home Promo 1"
-      },
-      {
-        "type": "image",
-        "id": "home_banner3.jpg",
-        "label": "Home Banner Image 3"
-      },
-      {
-        "type": "text",
-        "id": "home_social-youtube-source",
-        "label": "Youtube Video Embed Code"
       }
     ]
   },
@@ -180,9 +170,44 @@
     "name": "Footer",
     "settings": [
       {
+        "type": "image",
+        "id": "footer_banner.jpg",
+        "label": "Footer Banner Image"
+      },
+      {
+        "type": "text",
+        "id": "home_social-youtube-source",
+        "label": "Youtube Video Embed Code"
+      },
+      {
         "type": "text",
         "id": "mailing_list_form_action",
-        "label": "Home banner"
+        "label": "Mailing List Form ID"
+      },
+      {
+        "type": "text",
+        "id": "twitter_link",
+        "label": "Twitter Link"
+      },
+      {
+        "type": "text",
+        "id": "facebook_link",
+        "label": "Facebook Link"
+      },
+      {
+        "type": "text",
+        "id": "pinterest_link",
+        "label": "Pinterest Link"
+      },
+      {
+        "type": "text",
+        "id": "instagram_link",
+        "label": "Instagram Link"
+      },
+      {
+        "type": "text",
+        "id": "email_link",
+        "label": "Contact Email Address"
       }
     ]
   },
