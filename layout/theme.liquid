@@ -16,7 +16,7 @@
   {% include 'global-header' %}
 
   <!-- Main -->
-  <main id="main" role="main" class="global-site {% if template != 'index' %}header-push{% endif %}">
+  <main id="main" role="main" class="global-site {{template}}">
     {{ content_for_layout }}
   </main>
 

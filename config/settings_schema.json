@@ -1,14 +1,5 @@
 [
   {
-    "name": "Welcome",
-    "settings": [
-      {
-        "type": "paragraph",
-        "content": "Theme settings allow designers to provide an easy way for any user to customize the look and feel of their shop without having to delve into HTML or CSS code. Please see our [help page on theme settings](http:\/\/docs.shopify.com\/themes\/theme-templates\/settings) to learn more about how you can make your theme customizable."
-      }
-    ]
-  },
-  {
     "name": "General",
     "settings": [
       {
@@ -30,6 +21,10 @@
   {
     "name": "Home",
     "settings": [
+      {
+        "type": "header",
+        "content": "Home Page Banners"
+      },
       {
         "type": "image",
         "id": "home_hero.jpg",
@@ -164,6 +159,20 @@
         "type": "textarea",
         "id": "home_promo-copy-6",
         "label": "Home promo 6 Copy"
+      }
+    ]
+  },
+  {
+    "name": "Shop",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Shop Hero"
+      },
+      {
+        "type": "image",
+        "id": "shop_hero.jpg",
+        "label": "Shop Hero Image"
       }
     ]
   },

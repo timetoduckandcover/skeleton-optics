@@ -1,51 +1,73 @@
 {% paginate collection.products by 4 %}
-<div class="wrapper">
-  <div class="row">
-    <div class="col-xs-12 col-sm-9">
-    	{% include 'breadcrumbs' %}
-    </div>
-    <div class="col-sm-3">
-      {% if paginate.pages > 1 %}
-      <div id="pagination">
-        {% include 'pagination' %}
+<div id="shop">
+  {% if collection.image %}
+    <div class="full-page-banner">
+      {% capture hero %}{{ collection.image  | img_url: 'master' }}{% endcapture %}
+      <img src="{{hero}}" alt="Shop Hero" class="img-full" />
+      <div class="caption">
+        <h1 class="uppercase">Shop</h1>
+        <span class="uppercase">{{ settings.home_hero-subtitle }}</span>
       </div>
-      {% endif %}
     </div>
-  </div>
-
-  <div class="row">
-
-    <div class="col-xs-12">
-      <div class="row collection-list">
-
-        {% if collection.description.size > 0 %}
-        <div class="rte">
-          {{ collection.description }}
+  {% endif %}
+  <div class="wrapper">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="row collection-list">
+          {% if collection.description.size > 0 %}
+          <div class="rte">
+            {{ collection.description }}
+          </div>
+          {% endif %}
+            {% for product in collection.products %}
+              <div class="col-xs-12 col-sm-6 col-md-3">
+                {% include 'product-grid-item' %}
+              </div>
+            {% else %}
+            <p>There are no products in this view.</p>
+            {% endfor %}
         </div>
-        {% endif %}
-          {% for product in collection.products %}
-            <div class="col-xs-12 col-sm-6 col-md-3">
-              {% include 'product-grid-item' %}
-            </div>
-          {% else %}
-          <p>There are no products in this view.</p>
-          {% endfor %}
       </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-sm-3 col-sm-offset-9">
-      {% if paginate.pages > 1 %}
-      <div id="pagination">
-        {% include 'pagination' %}
-      </div>
-      {% endif %}
     </div>
   </div>
 </div>
 {% endpaginate %}
 
+<!-- Filtering system -->
+<script>
+  jQuery(document).ready(function($) {
+    var ORIGIN = window.location.origin;
+    var ENDPOINT = ORIGIN + '/admin/products.json';
+    var products = [];
+    var filters = {
+      style: {
+        mens: false,
+        womens: false
+      },
+      activity: {
+        hunting: false,
+        fishing: false,
+        offroading: false,
+        tailgating: false
+      }
+      price {
+        range1: false,
+        range2: false,
+        range3: false
+      }
+    };
+    $.ajax({
+      url: ENDPOINT,
+      method: 'GET',
+      success: function(res) {
+        products = res.products;
+        console.log(products);
+      }
+    });
+  });
+</script>
+
+<!--
 <script>
   /* Product Tag Filters - Good for any number of filters on any type of collection page.
      Give you product tag filter select element a class of coll-filter.
@@ -97,4 +119,4 @@
     location.search = jQuery.param(Shopify.queryParams);
     {% endif %}
   });
-</script>
+</script> -->
