@@ -51,6 +51,12 @@
     </div>
     <div class="filter-group">
       <h4>Price</h4>
+      {% for link in linklists.filters-price.links %}
+        <label for="tag-{{ link.handle }}">
+          <input type="checkbox" name="tag-{{ link.handle }}" class="tag-checkbox" data-tag="{{ link.handle }}" id="tag-{{ link.handle }}" />
+          $ {{ link.handle }}
+        </label>
+      {% endfor %}
     </div>
   </div>
 </div>
