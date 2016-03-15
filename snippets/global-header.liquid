@@ -55,11 +55,11 @@
               <a href="/account">Account</a>
             </li>
             <li>
-              <a href="{{customer_logout_link}}">Log out</a>
+              {{ 'Sign Out' | customer_logout_link }}
             </li>
           {% else %}
             <li>
-              <a href="{{customer_login_link}}">Sign In</a>
+              {{ 'Sign In' | customer_login_link }}
             </li>
           {% endif %}
         {% endif %}

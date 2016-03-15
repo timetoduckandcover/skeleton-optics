@@ -156,6 +156,10 @@ body, input, textarea, select, button {
   font-family: 'Lato', 'Arial', 'Verdana', sans-serif;
   font-weight: 100;
 }
+.lato-regular {
+  font-family: 'Lato', 'Arial', 'Verdana', sans-serif;
+  font-weight: 400;
+}
 h1,h2,h3,h4,h5,h6 {
   margin-bottom: 12px;
   @extend .lato-black;
@@ -346,7 +350,7 @@ select {
       //@extend .lato-black;
     }
     h1 {
-      @include font(80);
+      @include font(70);
       position: relative;
       padding-bottom: 20px;
       margin-bottom: 20px;
@@ -360,7 +364,7 @@ select {
       }
     }
     span {
-      @include font(50);
+      @include font(44);
     }
   }
 }
@@ -807,6 +811,9 @@ main.global-site {
 }
 
 /* FOOTER */
+.footer_social-area {
+  margin: 40px 0;
+}
 footer.global-footer {
   width: 100%;
   background: $col-black;
