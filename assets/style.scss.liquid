@@ -1,9 +1,14 @@
+@font-face {
+  font-family: 'Lato Black';
+  src: url(Lato-Black.ttf);
+}
 
 /*------- Colors --------*/
 $col-grey: #7e898b;
 $col-black: #1b1e23;
 $col-turq: #8ee2ec;
-$col-lightgrey: #ebebeb;
+$col-lightgrey: #f6f7f8;
+$col-bordergrey: #eaeaea;
 $col-beige: #fddea7;
 $col-white: #fff;
 $col-orange: #ee6321;
@@ -81,6 +86,7 @@ body {
 body, input, textarea, select, button {
   font-family: 'Lato', 'Arial', 'Verdana', sans-serif;
   @include font(14);
+  font-weight: 400;
 }
 .wrapper {
   width: 100%;
@@ -137,8 +143,15 @@ body, input, textarea, select, button {
 }
 
 /*------- Typography --------*/
+.lato-black {
+  font-family: 'Lato Black', 'Lato', arial, sans-serif;
+}
+.lato-thin {
+  font-weight: 100;
+}
 h1,h2,h3,h4,h5,h6,p {
   margin-bottom: 12px;
+  @extend .lato-black;
 }
 h1 {
   @include font(34);
@@ -288,12 +301,13 @@ textarea {
     @include centre;
     h1, span {
       color: $col-white;
+      //@extend .lato-black;
     }
     h1 {
-      @include font(40);
+      @include font(80);
       position: relative;
-      padding-bottom: 30px;
-      margin-bottom: 30px;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
       &:after {
         content: '';
         width: 80px;
@@ -304,7 +318,7 @@ textarea {
       }
     }
     span {
-      @include font(20);
+      @include font(50);
     }
   }
 }
@@ -442,7 +456,10 @@ main.global-site {
   .home_promo-text {
     max-width: 600px;
     margin: 100px auto;
-    @include font(22);
+    span {
+      display: block;
+      @include font(40);
+    }
   }
   .home_collection {
 
@@ -450,11 +467,44 @@ main.global-site {
 }
 
 /* COLLECTION PAGE */
-.collections {
-  .col-3 {
-  .prod-image-wrap {
-    height: auto;
-    overflow: hidden;
+.collection-filters {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  margin: 40px 0;
+  .filters-header {
+    background: $col-lightgrey;
+    display: table-row;
+    width: 100%;
+    border-bottom: 4px solid $col-grey;
+    .filters-header-inner {
+      padding: 12px 0;
+    }
+  }
+  .filters-inner {
+    display: table-row;
+    width: 100%;
+    .filter-group {
+      display: table-cell;
+      width: 25%;
+      padding: 12px;
+      border-right: 1px solid $col-bordergrey;
+      border-bottom: 1px solid $col-bordergrey;
+      @extend .cf;
+      &:first-child {
+        border-left: 1px solid $col-bordergrey;
+      }
+      label {
+        float: left;
+        width: 50%;
+        margin-bottom: 12px;
+        text-transform: none;
+        color: $col-black;
+        @include font(13);
+        input {
+          width: auto;
+        }
+      }
     }
   }
 }

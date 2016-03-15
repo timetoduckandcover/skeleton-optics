@@ -1,0 +1,126 @@
+<div class="collection-filters">
+  <div class="filters-header">
+    <div class="filters-header-inner">
+      <h4>Filter</h4>
+      <select class="collection-paginate" name="">
+        <option value="3">3 products per page</option>
+        <option value="6">6 products per page</option>
+        <option value="9">9 products per page</option>
+        <option value="12">12 products per page</option>
+      </select>
+    </div>
+  </div>
+  <div class="filters-inner">
+    <div class="filter-group">
+      <h4>By Style</h4>
+      {% for link in linklists.filters-style.links %}
+        <label for="tag-{{ link.handle }}">
+          <input type="checkbox" name="tag-{{ link.handle }}" class="tag-checkbox" data-tag="{{ link.handle }}" id="tag-{{ link.handle }}" />
+          {{ link.handle }}
+        </label>
+      {% endfor %}
+    </div>
+    <div class="filter-group">
+      <h4>By Activity</h4>
+      {% for link in linklists.filters-activity.links %}
+        <label for="tag-{{ link.handle }}">
+          <input type="checkbox" name="tag-{{ link.handle }}" class="tag-checkbox" data-tag="{{ link.handle }}" id="tag-{{ link.handle }}" />
+          {{ link.handle }}
+        </label>
+      {% endfor %}
+    </div>
+    <div class="filter-group">
+      <h4>Frame Color</h4>
+      {% for link in linklists.filters-frame.links %}
+        <label for="tag-{{ link.handle }}">
+          <input type="checkbox" name="tag-{{ link.handle }}" class="tag-checkbox" data-tag="{{ link.handle }}" id="tag-{{ link.handle }}" />
+          {{ link.handle }}
+        </label>
+      {% endfor %}
+      <h4>Lens Color</h4>
+      {% for link in linklists.filters-lens.links %}
+        <label for="tag-{{ link.handle }}">
+          <input type="checkbox" name="tag-{{ link.handle }}" class="tag-checkbox" data-tag="{{ link.handle }}" id="tag-{{ link.handle }}" />
+          {{ link.handle }}
+        </label>
+      {% endfor %}
+    </div>
+    <div class="filter-group">
+      <h4>Price</h4>
+    </div>
+  </div>
+</div>
+
+<!-- Filtering system -->
+<script>
+  jQuery(document).ready(function($) {
+    var WINDOW_LOCATION = window.location;
+    var PATH = WINDOW_LOCATION.pathname.split('/');
+    var PATH_LENGTH = PATH.length;
+    var COLLECTION = PATH[2];
+    var tags = [];
+
+    // Check if path contains tags (3 index is something after collections/collectionName)
+    if(PATH_LENGTH === 4 & PATH[3] !== "") {
+      var tags = PATH[3].split('+');
+      _selectCheckboxes();
+    }
+
+    function _selectCheckboxes() {
+      for(var i=0; i<tags.length; i++) {
+        var tag = tags[i];
+        $('.tag-checkbox').each(function() {
+          if($(this).attr('data-tag') === tag) {
+            $(this).attr('checked', 'checked');
+          }
+        });
+      }
+    };
+
+    $('.tag-checkbox').on('click', function() {
+      var $this = $(this);
+      var tagName = $(this).attr('data-tag');
+      if($this.is(':checked')) { // add tag to array
+        if(tags.indexOf(tagName) === -1) {
+          tags.push(tagName);
+          _refreshPage();
+        }
+      } else { // remove tag from array
+        var tagIndex = tags.indexOf(tagName);
+        tags.splice(tagIndex, 1);
+        _refreshPage();
+      }
+    });
+
+    function _refreshPage() {
+      var joinedTags = tags.join('+');
+      if(joinedTags.slice(-1) === '+') { // if last char is '+', slice it off
+        joinedTags = joinedTags.charAt(joinedTags.length, -1);
+      }
+      window.location.href = '/collections' + '/' + COLLECTION + '/' + joinedTags;
+    };
+
+    $('.collection-paginate').on('change', function() {
+      var items = $(this).val();
+      localStorage.setItem('items_per_page', items);
+      _setPagination();
+    });
+
+    function _setPagination() {
+      if(localStorage.getItem('items_per_page') !== null) { // check if exists
+        var val = localStorage.getItem('items_per_page');
+        var valInt = Number(val);
+        $('.collection-paginate option[value="' + val + '"]').prop('selected', true);
+        $('.collection-item').each(function(i) {
+          var $this = $(this);
+          if((i + 1) <= valInt) {
+            $this.show();
+          } else {
+            $this.hide();
+          }
+        });
+      }
+    };
+    _setPagination();
+  });
+</script>

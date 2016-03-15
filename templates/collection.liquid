@@ -1,4 +1,3 @@
-{% paginate collection.products by 4 %}
 <div id="shop">
   {% if collection.image %}
     <div class="full-page-banner">
@@ -6,13 +5,15 @@
       <img src="{{hero}}" alt="Shop Hero" class="img-full" />
       <div class="caption">
         <h1 class="uppercase">Shop</h1>
-        <span class="uppercase">{{ settings.home_hero-subtitle }}</span>
+        <span class="uppercase">{{ collection.title }}</span>
       </div>
     </div>
   {% endif %}
+
   <div class="wrapper">
     <div class="row">
       <div class="col-xs-12">
+        {% include 'collection-filters' %}
         <div class="row collection-list">
           {% if collection.description.size > 0 %}
           <div class="rte">
@@ -24,99 +25,12 @@
                 {% include 'product-grid-item' %}
               </div>
             {% else %}
-            <p>There are no products in this view.</p>
+            <div class="col-xs-12">
+              <h3>Unfortunately no products match your criteria! Please try removing some filters.</h3>
+            </div>
             {% endfor %}
         </div>
       </div>
     </div>
   </div>
 </div>
-{% endpaginate %}
-
-<!-- Filtering system -->
-<script>
-  jQuery(document).ready(function($) {
-    var ORIGIN = window.location.origin;
-    var ENDPOINT = ORIGIN + '/admin/products.json';
-    var products = [];
-    var filters = {
-      style: {
-        mens: false,
-        womens: false
-      },
-      activity: {
-        hunting: false,
-        fishing: false,
-        offroading: false,
-        tailgating: false
-      }
-      price {
-        range1: false,
-        range2: false,
-        range3: false
-      }
-    };
-    $.ajax({
-      url: ENDPOINT,
-      method: 'GET',
-      success: function(res) {
-        products = res.products;
-        console.log(products);
-      }
-    });
-  });
-</script>
-
-<!--
-<script>
-  /* Product Tag Filters - Good for any number of filters on any type of collection page.
-     Give you product tag filter select element a class of coll-filter.
-     Give your collection select a class of coll-picker.
-     Brought to you by Caroline Schnapp. */
-  Shopify.queryParams = {};
-  if (location.search.length) {
-    for (var aKeyValue, i = 0, aCouples = location.search.substr(1).split('&'); i < aCouples.length; i++) {
-      aKeyValue = aCouples[i].split('=');
-      if (aKeyValue.length > 1) {
-        Shopify.queryParams[decodeURIComponent(aKeyValue[0])] = decodeURIComponent(aKeyValue[1]);
-      }
-    }
-  }
-  jQuery('.coll-picker').change(function() {
-    if (jQuery(this).val()) {
-      location.href = '/collections/' + jQuery(this).val();
-    }
-    else {
-      location.href = '/collections/all';
-    }
-  });
-  var collFilters = jQuery('.coll-filter');
-  collFilters.change(function() {
-    delete Shopify.queryParams.page;
-    var newTags = [];
-    collFilters.each(function() {
-      if (jQuery(this).val()) {
-        newTags.push(jQuery(this).val());
-      }
-    });
-    {% if collection.handle %}
-    var newURL = '/collections/{{ collection.handle }}';
-    if (newTags.length) {
-      newURL += '/' + newTags.join('+');
-    }
-    var search = jQuery.param(Shopify.queryParams);
-    if (search.length) {
-      newURL += '?' + search;
-    }
-    location.href = newURL;
-    {% else %}
-    if (newTags.length) {
-      Shopify.queryParams.constraint = newTags.join('+');
-    }
-    else {
-      delete Shopify.queryParams.constraint;
-    }
-    location.search = jQuery.param(Shopify.queryParams);
-    {% endif %}
-  });
-</script> -->

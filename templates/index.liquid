@@ -21,7 +21,7 @@
                   <div class="home_slider-area-slide">
                     <img src="{{ img | asset_url }}" alt="" class="img-full" />
                     {% if settings[title] %}
-                      <h2 class="has-line">{{ settings[title] }}</h2>
+                      <h2 class="has-line uppercase">{{ settings[title] }}</h2>
                     {% endif %}
                     {% if settings[copy] %}
                       <p>{{ settings[copy] }}</p>
@@ -41,7 +41,7 @@
                   <div class="home_slider-area-slide">
                     <img src="{{ img | asset_url }}" alt="" class="img-full" />
                     {% if settings[title] %}
-                      <h2 class="has-line">{{ settings[title] }}</h2>
+                      <h2 class="has-line uppercase">{{ settings[title] }}</h2>
                     {% endif %}
                     {% if settings[copy] %}
                       <p>{{ settings[copy] }}</p>
@@ -59,7 +59,7 @@
     <img src="{{ 'home_banner1.jpg' | asset_url }}" alt="Home Banner 1" class="img-full" />
   </div>
   <div class="home_promo-text text-center">
-    <h2>{{ settings.home_promo-text1 }}</h2>
+    <span>{{ settings.home_promo-text1 }}</span>
   </div>
   <div class="full-page-banner">
     <img src="{{ 'home_banner2.jpg' | asset_url }}" alt="Home Banner 1" class="img-full" />
@@ -71,7 +71,7 @@
           <div class="col-xs-12 col-sm-4 text-center">
             <!-- <p>ID: {{ product.id }}</p> -->
             <img src="{{ product.featured_image | img_url: 'master' }}" alt="" class="img-full" />
-            <h2 class="has-line">{{ product.title }}</h2>
+            <h2 class="has-line uppercase">{{ product.title }}</h2>
             <span>{{ product.price | money }}</span>
           </div>
         {% endfor %}
