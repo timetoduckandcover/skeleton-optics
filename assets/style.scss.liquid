@@ -12,8 +12,9 @@ $col-bordergrey: #eaeaea;
 $col-beige: #fddea7;
 $col-white: #fff;
 $col-orange: #ee6321;
+$col-blue: #6e9cc8;
 $col-body: #333;
-$col-links-primary: #ee6321;
+$col-links-primary: #6e9cc8;
 $col-links-secondary: #33B5A4;
 
 /* Baseline */
@@ -140,6 +141,10 @@ body, input, textarea, select, button {
 }
 .push-header {
   padding-top: 100px;
+}
+.sprite {
+  background-image: url(sprite.png);
+  background-repeat: no-repeat;
 }
 
 /*------- Typography --------*/
@@ -504,6 +509,39 @@ main.global-site {
         input {
           width: auto;
         }
+      }
+    }
+  }
+}
+.filters-switch-view {
+  a {
+    &.active {
+      color: green;
+    }
+  }
+  .filter_grid {
+
+  }
+  .filter_list {
+
+  }
+}
+.collection-listing {
+  .collection-item {
+    &.filter_grid {
+      .prod-image-wrap {
+        img {
+          @extend .img-full;
+        }
+      }
+    }
+    &.filter_list {
+      @extend .cf;
+      .prod-image-wrap {
+        float: left;
+      }
+      .prod-caption {
+        float: left;
       }
     }
   }

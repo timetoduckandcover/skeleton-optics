@@ -14,16 +14,14 @@
     <div class="row">
       <div class="col-xs-12">
         {% include 'collection-filters' %}
-        <div class="row collection-list">
+        <div class="row collection-listing">
           {% if collection.description.size > 0 %}
           <div class="rte">
             {{ collection.description }}
           </div>
           {% endif %}
             {% for product in collection.products %}
-              <div class="col-xs-12 col-sm-6 col-md-3">
-                {% include 'product-grid-item' %}
-              </div>
+              {% include 'product-grid-item' %}
             {% else %}
             <div class="col-xs-12">
               <h3>Unfortunately no products match your criteria! Please try removing some filters.</h3>

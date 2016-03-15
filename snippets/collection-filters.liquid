@@ -8,6 +8,10 @@
         <option value="9">9 products per page</option>
         <option value="12">12 products per page</option>
       </select>
+      <div class="filters-switch-view">
+        <a href="javascript:;" class="sprite filter_grid">grid</a>
+        <a href="javascript:;" class="sprite filter_list">list</a>
+      </div>
     </div>
   </div>
   <div class="filters-inner">
@@ -122,5 +126,35 @@
       }
     };
     _setPagination();
+
+    $('.filters-switch-view a').on('click', function() {
+      var $this = $(this);
+      if($this.hasClass('filter_grid')) {
+        localStorage.setItem('collection_style', 'filter_grid');
+        _setCollectionLayoutStyle();
+      }
+      if($this.hasClass('filter_list')) {
+        localStorage.setItem('collection_style', 'filter_list');
+        _setCollectionLayoutStyle();
+      }
+    });
+
+    function _setCollectionLayoutStyle() {
+      if(localStorage.getItem('collection_style') !== null) {
+        var style = localStorage.getItem('collection_style');
+        $('.filters-switch-view a').removeClass('active');
+        $('.collection-item').removeClass('filter_grid filter_list col-sm-6 col-md-3').addClass(style);
+        if(style === 'filter_grid') {
+          $('.collection-item').addClass('col-sm-6 col-md-3');
+          $('.filters-switch-view .filter_grid').addClass('active');
+        } else {
+          $('.filters-switch-view .filter_list').addClass('active');
+        }
+      } else {
+        $('.collection-item').addClass('filter_grid');
+        $('.filters-switch-view .filter_grid').addClass('active');
+      }
+    };
+    _setCollectionLayoutStyle();
   });
 </script>
