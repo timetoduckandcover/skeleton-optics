@@ -8,6 +8,7 @@ $col-grey: #7e898b;
 $col-black: #1b1e23;
 $col-turq: #8ee2ec;
 $col-lightgrey: #f6f7f8;
+$col-darkgrey: #404040;
 $col-bordergrey: #eaeaea;
 $col-beige: #fddea7;
 $col-white: #fff;
@@ -86,7 +87,7 @@ body {
 }
 body, input, textarea, select, button {
   font-family: 'Lato', 'Arial', 'Verdana', sans-serif;
-  @include font(14);
+  @include font(16);
   font-weight: 400;
 }
 .wrapper {
@@ -154,7 +155,7 @@ body, input, textarea, select, button {
 .lato-thin {
   font-weight: 100;
 }
-h1,h2,h3,h4,h5,h6,p {
+h1,h2,h3,h4,h5,h6 {
   margin-bottom: 12px;
   @extend .lato-black;
 }
@@ -196,9 +197,13 @@ em { font-style: italic; }
     background: $col-black;
   }
 }
+p {
+  margin-bottom: 12px;
+}
 
 /*------- Links --------*/
 a {
+  color: $col-blue;
   text-decoration: underline;
   @include transition;
 }
@@ -252,6 +257,15 @@ textarea {
   @extend input;
   resize: none;
   height: 240px;
+}
+select {
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  appearance:none;
+  border-radius: 0;
+  background: $col-white;
+  border: 1px solid $col-bordergrey;
+  padding: 6px 12px;
 }
 
 .inline-form {
@@ -472,47 +486,99 @@ main.global-site {
 }
 
 /* COLLECTION PAGE */
-.collection-filters {
-  display: table;
-  table-layout: fixed;
-  width: 100%;
+.collection-filters-wrapper {
   margin: 40px 0;
   .filters-header {
     background: $col-lightgrey;
-    display: table-row;
     width: 100%;
-    border-bottom: 4px solid $col-grey;
+    border-top: 1px solid $col-bordergrey;
+    border-right: 1px solid $col-bordergrey;
+    border-bottom: 4px solid $col-darkgrey;
+
     .filters-header-inner {
-      padding: 12px 0;
+      @extend .cf;
+      .filters-header-toggle {
+        float: left;
+        a {
+          display: inline-block;
+          padding: 12px;
+          color: $col-white;
+          text-decoration: none;
+          background: $col-darkgrey;
+        }
+        span {
+          padding-left: 12px;
+        }
+      }
+      .filters-header-options {
+        @extend .cf;
+        float: right;
+        .filters-switch-view {
+          float: left;
+          @extend .cf;
+          margin-right: 12px;
+          a {
+            width: 44px;
+            height: 44px;
+            float: left;
+            background-size: 114px 99px;
+            border-right: 1px solid $col-bordergrey;
+            transition: none;
+            &.filter_grid {
+              border-left: 1px solid $col-bordergrey;
+              background-position: 0 -51px;
+              &.active {
+                background-position: 0 -1px;
+              }
+            }
+            &.filter_list {
+              background-position: -47px -1px;
+              &.active {
+                background-position: -47px -51px;
+              }
+            }
+          }
+        }
+        .collection-paginate {
+          float: right;
+          margin: 5px 6px 0 0;
+        }
+      }
     }
   }
-  .filters-inner {
-    display: table-row;
+  .collection-filters {
+    display: table;
+    table-layout: fixed;
     width: 100%;
-    .filter-group {
-      display: table-cell;
-      width: 25%;
-      padding: 12px;
-      border-right: 1px solid $col-bordergrey;
-      border-bottom: 1px solid $col-bordergrey;
-      @extend .cf;
-      &:first-child {
-        border-left: 1px solid $col-bordergrey;
-      }
-      label {
-        float: left;
-        width: 50%;
-        margin-bottom: 12px;
-        text-transform: none;
-        color: $col-black;
-        @include font(13);
-        input {
-          width: auto;
+    .filters-inner {
+      display: table-row;
+      width: 100%;
+      .filter-group {
+        display: table-cell;
+        width: 25%;
+        padding: 12px;
+        border-right: 1px solid $col-bordergrey;
+        border-bottom: 1px solid $col-bordergrey;
+        @extend .cf;
+        &:first-child {
+          border-left: 1px solid $col-bordergrey;
+        }
+        label {
+          float: left;
+          width: 50%;
+          margin-bottom: 12px;
+          text-transform: none;
+          color: $col-black;
+          @include font(13);
+          input {
+            width: auto;
+          }
         }
       }
     }
   }
 }
+
 .filters-switch-view {
   a {
     &.active {
@@ -532,6 +598,16 @@ main.global-site {
       .prod-image-wrap {
         img {
           @extend .img-full;
+        }
+      }
+      .prod-caption {
+        h2 {
+          padding-bottom: 10px;
+          margin-bottom: 0;
+        }
+        .prod-price {
+          display: block;
+          @include font(30);
         }
       }
     }

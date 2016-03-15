@@ -22,21 +22,20 @@ Here, for the sake of teaching, we will use 2 presentation options:
 
 <div class="col-xs-12 collection-item {{ product-grid-item }}{% unless product.available %} sold-out{% endunless %}{% if on_sale %} on-sale{% endif %}{% if product-grid-item == 'four-per-row' %}{% cycle 'last': '', '', '', ' last-in-row' %}{% elsif product-grid-item == 'three-per-row' %}{% cycle 'last': '', '', ' last-in-row' %}{% endif %}">
   <div class="prod-image-wrap">
-    <a href="{{ product.url | within: collection }}">
-      <img src="{{ product.featured_image.src | product_img_url: 'medium' }}" alt="{{ product.featured_image.alt | escape }}" />
-    </a>
+    <!-- <a href="{{ product.url | within: collection }}" class="block"> -->
+    <img src="{{ product.featured_image.src | product_img_url: 'medium' }}" alt="{{ product.featured_image.alt | escape }}" />
+    <!-- </a> -->
   </div><!-- .prod-image-wrap -->
 
   <div class="prod-caption">
-      <a href="{{ product.url | within: collection }}" class="block">
+      <h2 class="text-center has-line uppercase">
+        <!-- <a href="{{ product.url | within: collection }}" class="block"> -->
         {{ product.title }}
-      </a>
-      <a href="{{ product.url | within: collection }}" class="block">
-        {{ product.vendor }}
-      </a>
-      <span class="prod-price">
+        <!-- </a> -->
+      </h2>
+      <span class="prod-price text-center lato-thin">
         {% if product.price_varies %}From{% endif %}
-        {{ product.price | money }}
+        <span class="text-center">{{ product.price | money }}</span>
         {% if on_sale %}
         <s class="compare-at-price">{{ product.compare_at_price | money }}</s>
         {% endif %}
@@ -45,7 +44,7 @@ Here, for the sake of teaching, we will use 2 presentation options:
       All themes by Shopify should support the Grapevine Reviews app out of the box.
       https://apps.shopify.com/grapevine-reviews
       {% endcomment %}
-      <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+      <!-- <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span> -->
   </div><!-- .prod-caption -->
 </div>
 

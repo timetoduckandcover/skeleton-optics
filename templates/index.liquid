@@ -66,14 +66,9 @@
   </div>
   <div class="wrapper">
     <div class="home_collection section-padding">
-      <div class="row">
+      <div class="row collection-listing">
         {% for product in collections.frontpage.products %}
-          <div class="col-xs-12 col-sm-4 text-center">
-            <!-- <p>ID: {{ product.id }}</p> -->
-            <img src="{{ product.featured_image | img_url: 'master' }}" alt="" class="img-full" />
-            <h2 class="has-line uppercase">{{ product.title }}</h2>
-            <span>{{ product.price | money }}</span>
-          </div>
+          {% include 'product-grid-item' %}
         {% endfor %}
       </div>
     </div>
@@ -94,3 +89,7 @@
 {% endfor %}
 </ul>
 {% endunless %}
+
+<script type="text/javascript">
+  $('.collection-item').addClass('filter_grid col-sm-6 col-md-4');
+</script>
