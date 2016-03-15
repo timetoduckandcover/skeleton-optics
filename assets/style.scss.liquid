@@ -13,6 +13,7 @@ $col-bordergrey: #eaeaea;
 $col-beige: #fddea7;
 $col-white: #fff;
 $col-orange: #ee6321;
+$col-red: #9F0303;
 $col-blue: #6e9cc8;
 $col-body: #333;
 $col-links-primary: #6e9cc8;
@@ -688,6 +689,7 @@ main.global-site {
 }
 .product-compare-price {
   @include font(19);
+  color: $col-orange;
 }
 
 .shipping-options {
@@ -793,21 +795,25 @@ main.global-site {
 
 
 /* LOGIN & REGISTER */
-#customer {
+#customer, #template {
   h2 {
     margin-bottom: $baseline;
   }
   label {
     display: block;
+    @include font(14);
   }
-  input[type="text"] {
-    margin-bottom: $baseline;
+  .large_form {
+    margin-bottom: 12px;
+  }
+  .errors {
+    margin-bottom: 24px;
+    color: $col-red;
   }
   .action_bottom,
   #forgot_password {
     margin-top: $baseline;
   }
-
 }
 
 /* FOOTER */

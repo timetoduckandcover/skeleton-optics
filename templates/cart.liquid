@@ -114,10 +114,15 @@
               <a href="{{ collection_url }}" class="underline">Back to Shopping</a>
           </div>
           <div class="col-xs-12 col-sm-3 col-sm-offset-5">
-            <h3><strong>Total savings {{ cart.total_price | money }}</strong></h3>
-            <h3><strong>Sub-total {{ cart.total_price | money }}</strong></h3>
-            <h3>Est Shipping $0.00</h3>
-            <h3 class="donation" style="display:none">$1 Donation: Yes</h3>
+            <h3 class="lato-thin cf">
+              <span class="pull-left">Sub-total</span>
+              <span class="pull-right">{{ cart.total_price | money }}</span>
+            </h3>
+            <!-- <h3>
+              <span class="pull-left">Est Shipping</span>
+              <span class="pull-right">$0.00</span>
+            </h3> -->
+            <!-- <h3 class="donation" style="display:none">$1 Donation: Yes</h3> -->
             <div class="checkout-btns">
               <input type="submit" name="update" value="Update cart" class="mbs" />
               <input type="submit" name="checkout" value="Checkout" class="checkout-button" />
