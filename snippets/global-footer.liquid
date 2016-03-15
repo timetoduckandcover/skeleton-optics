@@ -22,7 +22,7 @@
 <footer class="global-footer">
   <div class="wrapper">
     <div class="row">
-      <div class="col-xs-12 col-sm-3">
+      <div class="col-xs-12 col-sm-4">
         <h3>Follow</h3>
         <ul class="social">
           {% if settings.twitter_link %}
@@ -53,27 +53,29 @@
         </ul>
       </div>
       {% if linklists.footer.links.size > 0 %}
-        <div class="col-xs-12 col-sm-9">
+        <div class="col-xs-12 col-sm-8">
           <ul role="navigation" class="footer-linklist">
           {% for link in linklists.footer.links %}
             <li><a href="{{ link.url }}" title="{{ link.title }}"{% if link.active %} class="active"{% endif %}>{{ link.title }}</a></li>
           {% endfor %}
           </ul>
-          <div class="mailchimp">
+          <div class="mailchimp-area">
             <p>Sign up to get the latest on sales, new releases and more...</p>
             {% include 'mailchimp' %}
+            <div class="copyright">
+              <p>{{ 'now' | date: "%Y" }} Skeleton Optics</p>
+              <ul>
+                <li>
+                  <a href="/pages/privacy-policy">Privacy Policy</a>
+                </li>
+                <li>
+                  <a href="/pages/terms-of-use">Terms of Use</a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       {% endif %}
-    </div>
-
-    <div class="row">
-      <div class="col-xs-12 col-sm-3">
-        <span>All rights reserved 1st Parents</span>
-      </div>
-      <div class="col-xs-12 col-sm-3">
-        <span>1-888-FIRST-FIRST</span>
-      </div>
     </div>
   </div>
 </footer>
