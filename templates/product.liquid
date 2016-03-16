@@ -10,15 +10,16 @@
           <div class="product-photo-container"></div>
           <ul class="product-photo-thumbs row"></ul>
         </div>
-        <div class="product-details col-xs-12 col-sm-4 col-sm-offset-1">
+        <div class="product-details col-xs-12 col-sm-6">
           <h1></h1>
           <div id="product-description" class="rte" itemprop="description">
+            <span class="block uppercase product-label">Quick Overview</span>
             {{ product.description }}
           </div>
           <div class="product-variants">
-            <h5>Select Frame</h5>
+            <span class="block uppercase product-label">Select Frame</span>
             <ul class="option1"></ul>
-            <h5>Select Lens</h5>
+            <span class="block uppercase product-label">Select Lens</span>
             <ul class="option2"></ul>
             <ul class="option3"></ul>
             <ul class="option4"></ul>
@@ -31,7 +32,7 @@
             {% else %}
             <link itemprop="availability" href="http://schema.org/OutOfStock" />
             {% endif %}
-            <p>
+            <p>$
               <span class="product-price" itemprop="price"></span>
               <!-- {% assign variant = product.selected_or_first_available_variant %} -->
               <!-- {% if product.compare_at_price > product.price %}
@@ -41,6 +42,12 @@
 
               {% endif %} -->
             </p>
+            <div class="product-qty-selector">
+              <a href="javascript:;" data-selector="dec">-</a>
+              <input type="text" value="1" disabled/>
+              <a href="javascript:;" data-selector="inc">+</a>
+            </div>
+            <a href="javascript:;" id="add-to-cart">Add to cart</a>
           </div>
         </div>
       </div>
@@ -59,6 +66,7 @@
     var product;
     var assetUrl = $('#assetUrl').val().split('/');
     var selectedVariant = null;
+    var quantity = 1;
     assetUrl.splice(-1,1);
     assetUrl = assetUrl.join('/');
 
@@ -182,7 +190,7 @@
 
         function _setDefaultVariant(obj) {
           selectedVariant = obj;
-          _updateProductView();
+          _calculateDisplayPrice();
         };
 
         function _setNewVariant(name, option) {
@@ -194,14 +202,9 @@
               selectedVariant.id = product.variants[i].id;
               selectedVariant.price = product.variants[i].price;
               selectedVariant.quantity = product.variants[i].inventory_quantity;
-              _updateProductView();
+              _calculateDisplayPrice();
             }
           }
-        };
-
-        function _updateProductView() {
-          // console.log(selectedVariant);
-          $('.product-price').text(selectedVariant.price);
         };
 
         $('body').on('click', '.product-variant-selector', function() {
@@ -211,6 +214,49 @@
           _setNewVariant(name, option);
         });
 
+        // Handle product quantity changes
+        $('.product-qty-selector a').on('click', function() {
+          var $this = $(this);
+          var input = $('.product-qty-selector input');
+          var inputVal = Number(input.val());
+          if($this.attr('data-selector') === 'dec') {
+            if(inputVal !== 1) {
+              input.val(inputVal - 1);
+              quantity = inputVal - 1;
+            }
+          } else {
+            input.val(inputVal + 1);
+            quantity = inputVal + 1;
+          }
+          _calculateDisplayPrice();
+        });
+
+        // Calculate on screen display price
+        function _calculateDisplayPrice() {
+          var newPrice = (selectedVariant.price * quantity).toFixed(2);
+          $('.product-price').text(newPrice);
+        };
+
+        // AJAX add to cart
+        $('#add-to-cart').on('click', function() {
+          $.ajax({
+            url: window.location.origin + '/cart/add.js',
+            data: {
+              id: selectedVariant.id,
+              quantity: quantity
+            },
+            method: 'POST',
+            beforeSend: function() {
+              console.log('sending');
+            },
+            success: function(data) {
+              console.log('data: ', data);
+            },
+            error: function(err) {
+              console.log(err);
+            }
+          })
+        });
       };
     });
   });

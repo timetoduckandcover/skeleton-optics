@@ -654,30 +654,12 @@ main.global-site {
 
 /* PRODUCT PAGE */
 #product-description {
-  margin-top: 20px;
+  margin-bottom: 20px;
 }
-.product-options {
-  margin: $baseline 0;
-  position: relative;
-  .title {
-    background: $col-white;
-    padding: 0 10px;
-    text-align: center;
-    display: block;
-  margin: 0 auto;
-  width: 120px;
-    text-transform:uppercase;
-  }
-  .line {
-    background: $col-grey;
-    position: absolute;
-    top: 10px;
-    left: 0;
-    height: 1px;
-    display: block;
-    width: 100%;
-    z-index: -1;
-  }
+
+.product-price {
+  @include font(40);
+  color: $col-orange;
 }
 .product-price.on-sale {
   margin-right: $baseline/2;
@@ -692,46 +674,70 @@ main.global-site {
   color: $col-orange;
 }
 
+.product-qty-selector {
+  @extend .cf;
+  text-align: center;
+  a, input {
+    float: left;
+  }
+  a {
+    border: 1px solid $col-bordergrey;
+    text-decoration: none;
+    @extend .lato-black;
+    display: block;
+    width: 40px;
+    height: 32px;
+    color: $col-black;
+    @include font(17);
+    line-height: 32px;
+  }
+  input {
+    border-top: 1px solid $col-bordergrey;
+    border-bottom: 1px solid $col-bordergrey;
+    width:70px;
+    height: 32px;
+    text-align: center;
+    border-left: none;
+    border-right: none;
+    @include font(14);
+  }
+}
+
 .shipping-options {
   border-bottom: 1px solid $col-grey;
     padding-bottom: $baseline;
 }
-.product-price {
-  @include font(24);
-  color: #666;
-  padding-right: $baseline/4;
+
+.product-label {
+  margin-bottom: 12px;
+  @include font(12);
 }
-.add-to-cart {
-  @include font(26);
+#add-to-cart {
+  background: $col-orange;
+  border-radius: 20px;
+  padding: 0 30px;
+  color: $col-white;
+  text-decoration: none;
+  display: inline-block;
+  line-height: 34px;
+  text-transform: uppercase;
 }
 .shipping-options a {
   text-decoration: underline;
 }
-#product-photo-thumbs {
-  margin-bottom: $baseline*2;
-  .col-2 {
-    overflow: hidden;
-    height: auto;
-  }
-}
+
+
 
 
 /* PRODUCT VARIANTS */
-#product-variants {
-  li {
-    display: inline-block;
-    width: auto;
-    color: $col-white;
-    label {
-      background: $col-grey;
-      padding: 7px;
-      &.active {
-        background: $col-black;
-      }
+.product-variants {
+  ul {
+    @extend .cf;
+    margin-bottom: 12px;
+    li {
+      float: left;
+      margin-right: 6px;
     }
-  }
-  input[type="radio"] {
-    opacity: 0;
   }
 }
 
