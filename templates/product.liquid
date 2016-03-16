@@ -12,6 +12,9 @@
         </div>
         <div class="product-details col-xs-12 col-sm-4 col-sm-offset-1">
           <h1></h1>
+          <div id="product-description" class="rte" itemprop="description">
+            {{ product.description }}
+          </div>
           <div class="product-variants">
             <h5>Select Frame</h5>
             <ul class="option1"></ul>
@@ -20,6 +23,24 @@
             <ul class="option3"></ul>
             <ul class="option4"></ul>
             <ul class="option5"></ul>
+          </div>
+          <div id="product-price" itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="delta">
+            <meta itemprop="priceCurrency" content="{{ shop.currency }}" />
+            {% if product.available %}
+            <link itemprop="availability" href="http://schema.org/InStock" />
+            {% else %}
+            <link itemprop="availability" href="http://schema.org/OutOfStock" />
+            {% endif %}
+            <p>
+              <span class="product-price" itemprop="price"></span>
+              <!-- {% assign variant = product.selected_or_first_available_variant %} -->
+              <!-- {% if product.compare_at_price > product.price %}
+                <span class="product-price on-sale" itemprop="price">{{ variant.price | money }}</span>
+                <s class="product-compare-price">{{ variant.compare_at_price | money }}</s>
+              {% else %}
+
+              {% endif %} -->
+            </p>
           </div>
         </div>
       </div>
@@ -32,12 +53,15 @@
 
 <script type="text/javascript">
   jQuery(document).ready(function($) {
+
     var productWrapper = $('#product');
     var productId = $('#productId').val();
     var product;
     var assetUrl = $('#assetUrl').val().split('/');
+    var selectedVariant = null;
     assetUrl.splice(-1,1);
     assetUrl = assetUrl.join('/');
+
     $.ajax({
       url: window.location.origin + '/admin/products/' + productId + '.json',
       success: function(res) {
@@ -78,7 +102,22 @@
           option5: []
         };
         for(var i=0; i<product.variants.length; i++) {
+
+          // Set default variant if empty object
+          if(selectedVariant === null) {
+            obj = {
+              id: product.variants[0].id,
+              title: product.variants[0].title,
+              option1: product.variants[0].option1,
+              option2: product.variants[0].option2,
+              price: product.variants[0].price,
+              quantity: product.variants[0].inventory_quantity
+            };
+            _setDefaultVariant(obj);
+          }
+
           var obj = product.variants[i];
+          // console.log(obj);
           if(obj.hasOwnProperty('option1') && obj.option1 !== null) {
             var option1 = obj.option1;
             if(variants.option1.indexOf(option1) === -1) {
@@ -115,13 +154,12 @@
         }, 1000);
 
         function _createVariants() {
-          console.log(variants.length);
           if(variants.option1.length) {
             for(var i=0; i<variants.option1.length; i++) {
               var handle = variants.option1[i].toLowerCase();
               $('.product-variants .option1').append(
                 '<li>'+
-                  '<a href="javascript:;" data-name="' + handle + '">'+
+                  '<a href="javascript:;" data-name="' + variants.option1[i] + '" data-option="option1" class="product-variant-selector">'+
                     '<img src="' + assetUrl + '/variant-frame-' + handle + '.png"  />'+
                   '</a>'+
                 '</li>'
@@ -133,7 +171,7 @@
               var handle = variants.option1[i].toLowerCase();
               $('.product-variants .option2').append(
                 '<li>'+
-                  '<a href="javascript:;" data-name="' + handle + '">'+
+                  '<a href="javascript:;" data-name="' + variants.option2[i] + '" data-option="option2" class="product-variant-selector">'+
                     '<img src="' + assetUrl + '/variant-frame-' + handle + '.png"  />'+
                   '</a>'+
                 '</li>'
@@ -141,6 +179,37 @@
             }
           }
         };
+
+        function _setDefaultVariant(obj) {
+          selectedVariant = obj;
+          _updateProductView();
+        };
+
+        function _setNewVariant(name, option) {
+          selectedVariant[option] = name;
+          selectedVariant.title = selectedVariant.option1 + ' / ' + selectedVariant.option2;
+          for(var i=0; i<product.variants.length; i++) {
+            var title = product.variants[i].title;
+            if(selectedVariant.title === title) {
+              selectedVariant.id = product.variants[i].id;
+              selectedVariant.price = product.variants[i].price;
+              selectedVariant.quantity = product.variants[i].inventory_quantity;
+              _updateProductView();
+            }
+          }
+        };
+
+        function _updateProductView() {
+          // console.log(selectedVariant);
+          $('.product-price').text(selectedVariant.price);
+        };
+
+        $('body').on('click', '.product-variant-selector', function() {
+          var $this = $(this);
+          var name = $this.attr('data-name');
+          var option = $this.attr('data-option');
+          _setNewVariant(name, option);
+        });
 
       };
     });
