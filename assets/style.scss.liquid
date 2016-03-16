@@ -95,7 +95,7 @@ body, input, textarea, select, button {
 .wrapper {
   width: 100%;
   padding: 0 20px;
-  max-width: 980px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
@@ -257,7 +257,7 @@ input {
     text-transform: uppercase;
     @include font(15);
     line-height: 24px;
-    &:hover { background: $col-links-primary; border: 1px solid $col-links-primary; cursor: pointer;}
+    &:hover { background: $col-links-primary; cursor: pointer;}
     &.add-to-cart {
       text-transform: uppercase;
       width: 100%;
@@ -636,6 +636,17 @@ main.global-site {
         }
       }
       .prod-caption {
+        position: relative;
+        .quickview-link {
+          background-size: 100px 97px;
+          width: 40px;
+          height: 40px;
+          position: absolute;
+          right: 0;
+          top: -20px;
+          display: block;
+          background-position: -81px -32px;
+        }
         h2 {
           padding-bottom: 10px;
           margin-bottom: 0;
@@ -845,9 +856,9 @@ main.global-site {
   padding: $baseline 0;
 }
 .checkout-btns {
-  margin: $baseline/2 0;
-  .checkout-button {
-
+  margin: $baseline 0 $baseline/2 0;
+  input {
+    width: 100%;
   }
 }
 .additional-checkout-buttons {
@@ -867,12 +878,16 @@ main.global-site {
     display: inline-block;
   }
   .plus, .minus {
-    width: 20px;
     display: inline-block;
+    text-decoration: none;
+    color: $col-black;
+    padding: 0 4px;
   }
 }
 .remove-item {
   width: 20px;
+  text-decoration: none;
+  color: $col-black;
 }
 
 #shipping-calculator {}

@@ -28,22 +28,23 @@ Here, for the sake of teaching, we will use 2 presentation options:
   </div><!-- .prod-image-wrap -->
 
   <div class="prod-caption">
-      <h2 class="text-center has-line uppercase">
-        <!-- <a href="{{ product.url | within: collection }}" class="block"> -->
-        {{ product.title }}
-        <!-- </a> -->
-      </h2>
-      <span class="prod-price text-center lato-thin">
-        <span class="text-center">{{ product.price | money }}</span>
-        {% if on_sale %}
-        <s class="compare-at-price">{{ product.compare_at_price | money }}</s>
-        {% endif %}
-      </span>
-      {% comment %}
-      All themes by Shopify should support the Grapevine Reviews app out of the box.
-      https://apps.shopify.com/grapevine-reviews
-      {% endcomment %}
-      <!-- <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span> -->
+    <a href="javascript:;" class="sprite quickview-link"></a>
+    <h2 class="text-center has-line uppercase">
+      <!-- <a href="{{ product.url | within: collection }}" class="block"> -->
+      {{ product.title }}
+      <!-- </a> -->
+    </h2>
+    <span class="prod-price text-center lato-thin">
+      <span class="text-center">{{ product.price | money }}</span>
+      {% if on_sale %}
+      <s class="compare-at-price">{{ product.compare_at_price | money }}</s>
+      {% endif %}
+    </span>
+    {% comment %}
+    All themes by Shopify should support the Grapevine Reviews app out of the box.
+    https://apps.shopify.com/grapevine-reviews
+    {% endcomment %}
+    <!-- <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span> -->
   </div><!-- .prod-caption -->
 </div>
 
