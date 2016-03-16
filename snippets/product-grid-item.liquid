@@ -34,7 +34,6 @@ Here, for the sake of teaching, we will use 2 presentation options:
         <!-- </a> -->
       </h2>
       <span class="prod-price text-center lato-thin">
-        {% if product.price_varies %}From{% endif %}
         <span class="text-center">{{ product.price | money }}</span>
         {% if on_sale %}
         <s class="compare-at-price">{{ product.compare_at_price | money }}</s>
