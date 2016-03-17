@@ -3,7 +3,7 @@
     <div class="filters-header-inner">
       <div class="filters-header-toggle">
         <a href="javascript:;" class="uppercase">Filter</a>
-        <span>Showing 1 - <i class="products-displayed"></i> of {{collection.products.size}} results</span>
+        <span>Showing <i class="products-count-start"></i> - <i class="products-displayed"></i> of {{collection.products.size}} results</span>
         <input type="hidden" name="name" value="{{collection.products.size}}" class="products-total">
       </div>
       <div class="filters-header-options">
@@ -137,7 +137,11 @@
         var valInt = Number(val);
         $('.collection-paginate option[value="' + val + '"]').prop('selected', true);
         var totalCount = Number($('.products-total').val());
+        $('.products-count-start').text('1');
         if(totalCount < valInt) {
+          if(totalCount === 0) {
+            $('.products-count-start').text('0');
+          }
           $('.products-displayed').text(totalCount);
         } else {
           $('.products-displayed').text(val);
