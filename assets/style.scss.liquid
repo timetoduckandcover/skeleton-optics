@@ -384,12 +384,16 @@ select {
 
 /* HEADER */
 header.global-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
   background: rgba(0,0,0,.6);
   z-index: 7000;
+  height: 70px;
+  @include breakpoint(medium) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: auto;
+  }
   .site-logo {
     display: block;
     width: 156px;
@@ -397,17 +401,35 @@ header.global-header {
     margin-right: 24px;
     padding-top: 23px;
   }
+  .nav-wrapper {
+    position: absolute;
+    top: 70px;
+    right: 0;
+    background: rgba(0,0,0,.6);
+    z-index: 7000;
+    padding: 12px;
+    @include breakpoint(medium) {
+      position: static;
+      background: transparent;
+      padding: 0;
+    }
+  }
   nav {
     float: left;
   }
   #header_meta {
-    float: right;
+    @include breakpoint(medium) {
+      float: right;
+    }
   }
   .nav-links {
     & > li {
-      display: inline-block;
-      margin-right: 12px;
+      display: block;
       position: relative;
+      @include breakpoint(medium) {
+        display: inline-block;
+        margin-right: 12px;
+      }
       &.cart-nav-item {
         a {
           &:before {
@@ -443,24 +465,30 @@ header.global-header {
         text-decoration: none;
         display: block;
         color: $col-white;
-        line-height: 70px;
+        @include breakpoint(medium) {
+          line-height: 70px;
+        }
         &:hover {
           color: $col-links-primary;
         }
       }
       &:hover {
         .sub-nav {
-          display: block;
+          @include breakpoint(medium) {
+            display: block;
+          }
         }
       }
       .sub-nav {
-        padding: 4px 12px 12px 12px;
-        display: none;
-        position: absolute;
-        background: rgba(0,0,0,.6);
-        top: 70px;
-        left: -12px;
-        min-width: 200px;
+        @include breakpoint(medium) {
+          display: none;
+          position: absolute;
+          top: 70px;
+          left: -12px;
+          min-width: 200px;
+          background: rgba(0,0,0,.6);
+          padding: 4px 12px 12px 12px;
+        }
         li {
           a {
             color: $col-white;
@@ -1160,7 +1188,7 @@ footer.global-footer {
 .burger {
   display: block;
   position: absolute;
-  top: 10px;
+  top: 23px;
   right: 20px;
   width:18px;
   height:18px;
@@ -1173,17 +1201,17 @@ footer.global-footer {
     display: inline-block;
     width: 18px;
     height: 3px;
-    color:#252525;
+    color: $col-white;
     font:bold 14px/.4 Helvetica;
     text-transform: uppercase;
     text-indent:-55px;
-    background: #252525;
+    background: $col-white;
     transition:all .2s ease-out;
     &:before, &:after {
       content:'';
       width: 18px;
       height: 3px;
-      background: #252525;
+      background: $col-white;
       position: absolute;
       left:0;
       transition:all .2s ease-out;
