@@ -46,6 +46,28 @@
             </div>
           </div>
           {% include 'wishlist-product' %}
+          <div class="share-product">
+            <ul class="no-list">
+              <li class="facebook">
+                <a href="javascript:;"
+                   onclick="window.open('http://www.facebook.com/sharer/sharer.php?u={{ canonical_url }}', 'targetWindow', 'width=600, height=400')">
+                  Share
+                </a>
+              </li>
+              <li class="twitter">
+                <a href="javascript:;"
+                   onclick="window.open('http://twitter.com/share?url={{ canonical_url }}', 'targetWindow', 'width=600, height=400')">
+                  Tweet
+                </a>
+              </li>
+              <li class="pinterest">
+                <a href="javascript:;"
+                   onclick="window.open('https://pinterest.com/pin/create/button/?url={{ canonical_url }}&media={{ featured_image | img_url: 'grande' }}', 'targetWindow', 'width=600, height=400')">
+                  Pin it
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
       <div class="row">
@@ -114,7 +136,7 @@
       }
     }).done(function() {
 
-      console.log(product);
+      // console.log(product);
 
       _splitVariants();
 
@@ -307,6 +329,7 @@
               $('#add-to-cart').text('Adding to cart...').addClass('disabled disable-click');
             }
           }).always(function() {
+            _getCart();
             setTimeout(function() {
               $('#add-to-cart').text('Thank you!').removeClass('disabled');
             }, 500);
@@ -327,6 +350,18 @@
           content.show();
         });
       };
+
+      // Get cart count
+      function _getCart() {
+        $.ajax({
+          url: '/cart.js'
+        }).always(function(cart){
+          var obj = jQuery.parseJSON(cart.responseText);
+          var count = obj.item_count;
+          $('.cart-nav-item a').text(count);
+        });
+      };
+      _getCart();
     });
   });
 </script>

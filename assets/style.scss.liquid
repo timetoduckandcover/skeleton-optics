@@ -772,6 +772,16 @@ main.global-site {
         text-transform: uppercase;
         @include font(13);
         line-height: 34px;
+        &:before {
+          content: '';
+          display: inline-block;
+          background-image: url(cart.png);
+          background-repeat: no-repeat;
+          background-size: 13px 11px;
+          width: 13px;
+          height: 11px;
+          margin-right: 6px;
+        }
       }
     }
   }
@@ -788,6 +798,27 @@ main.global-site {
     .wish-error {
       margin-top: 4px;
       margin-bottom: 0;
+    }
+  }
+
+  .share-product {
+    margin-top: 24px;
+    ul {
+      li {
+        display: inline-block;
+        margin-right: 12px;
+        a {
+          display: block;
+          border-radius: 3px;
+          text-decoration: none;
+          color: $col-white;
+          padding: 0 12px;
+          line-height: 24px;
+        }
+        &.facebook a {background:#3b5998;}
+        &.twitter a {background:#55ACEE;}
+        &.pinterest a {background:#cb2027;}
+      }
     }
   }
 
