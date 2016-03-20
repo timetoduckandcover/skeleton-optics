@@ -64,7 +64,8 @@
             {% endif %}
           {% endif %}
           <li class="currency-nav-item">
-            {{include 'currencies-switcher'}}
+            <a href="javascript:;" data-currency="USD" class="currency-selector">USD</a>
+            <a href="javascript:;" data-currency="GBP" class="currency-selector">GBP</a>
           </li>
           <li class="search-nav-item"><a href="/search"></a></li>
           <li class="cart-nav-item"><a href="/cart">{{ cart.item_count }}</a></li>

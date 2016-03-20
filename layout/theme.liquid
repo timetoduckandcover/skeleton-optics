@@ -1,7 +1,4 @@
 <!doctype html>
-<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
-<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en"> <![endif]-->
 <!--[if IE 9 ]><html class="ie9 no-js"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js"> <!--<![endif]-->
 
@@ -30,7 +27,59 @@
   <!-- Needs to run on every page -currency converter -->
   <script type="text/javascript">
 
-  </script>
+    var currentCurrency;
+    var symbols = [
+      {
+        currency: 'USD',
+        symbol: '$'
+      },
+      {
+        currency: 'CAD',
+        symbol: '$'
+      },
+      {
+        currency: 'GBP',
+        symbol: '£'
+      },
+      {
+        currency: 'EUR',
+        symbol: '€'
+      }
+    ];
 
+    function _switchCurrency(currency) {
+      $('.money').each(function() {
+        var $this = $(this);
+        var amount = $this.attr('data-amount');
+        var convertedAmount = Currency.convert(amount, '{{shop.currency}}', currency);
+        var formattedAmount = convertedAmount.toFixed(2);
+        var currencySymbol = '$';
+        for(var i=0; i<symbols.length; i++) {
+          if(currency === symbols[i].currency) {
+            currencySymbol = symbols[i].symbol;
+          }
+        }
+        var fullAmount = currencySymbol + formattedAmount;
+        $this.text(fullAmount);
+      });
+    };
+
+    function _checkCurrency() {
+      if(localStorage.getItem('selected_currency') === null) {
+        localStorage.setItem('selected_currency', '{{shop.currency}}');
+      }
+      currentCurrency = localStorage.selected_currency;
+      _switchCurrency(currentCurrency);
+    };
+    _checkCurrency();
+
+    $('.currency-selector').on('click', function() {
+      var $this = $(this);
+      var currency = $this.attr('data-currency');
+      localStorage.setItem('selected_currency', currency);
+      _switchCurrency(currency);
+    });
+
+  </script>
 </body>
 </html>
