@@ -408,6 +408,20 @@ header.global-header {
       display: inline-block;
       margin-right: 20px;
       position: relative;
+      &.cart-nav-item {
+        a {
+          &:before {
+            content: '';
+            background-image: url(cart.png);
+            background-repeat: no-repeat;
+            background-size: 13px 11px;
+            width: 13px;
+            height: 11px;
+            display: inline-block;
+            margin-right: 4px;
+          }
+        }
+      }
       &.active a {
         color: $col-links-primary;
       }
@@ -986,7 +1000,7 @@ footer.global-footer {
   .mailchimp-area {
     text-align: center;
     @include breakpoint(medium) {
-      max-width: 440px;
+      width: 440px;
       float: right;
       text-align: left;
     }
