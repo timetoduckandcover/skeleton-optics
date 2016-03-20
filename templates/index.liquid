@@ -71,6 +71,33 @@
           {% include 'product-grid-item' %}
         {% endfor %}
       </div>
+      <div class="row featured-product">
+        {% for product in collections.featured-product.products %}
+          <div class="row">
+            <div class="col-xs-12 col-sm-5 col-sm-offset-1">
+              <img src="{{ product.featured_image.src | product_img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}" class="img-full" />
+            </div>
+            <div class="col-xs-12 col-sm-4">
+              <div class="featured-product-right">
+                <h2 class="uppercase">
+                  {{ product.title }}
+                </h2>
+                <i class="line"></i>
+                <span class="prod-price lato-thin">
+                  <span class="text-center">{{ product.price | money }}</span>
+                  {% if on_sale %}
+                  <s class="compare-at-price">{{ product.compare_at_price | money }}</s>
+                  {% endif %}
+                </span>
+                <p>{{ product.description }}</p>
+                <a href="{{ product.url | within: collection }}">
+                  View
+                </a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
     </div>
   </div>
 </div>
