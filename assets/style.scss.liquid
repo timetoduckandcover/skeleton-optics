@@ -475,6 +475,7 @@ header.global-header {
         text-decoration: none;
         display: block;
         color: $col-white;
+        @include font(12);
         @include breakpoint(large) {
           line-height: 70px;
         }
@@ -523,31 +524,24 @@ header.global-header {
 
 
 /* CURRENCIES */
-#currencies {
+.currency-nav-item {
   position: relative;
-  .currency-header {
-    color: $col-orange;
-    text-transform: uppercase;
-  }
-  .currencies-hide {
-    display: block;
-    background: $col-white;
-    padding: 6px;
-    z-index: 999999;
-    span:hover {
+  .selected-currency {
+    color: $col-white;
+    &:hover {
       cursor: pointer;
     }
-    @include breakpoint(medium) {
-      display: none;
-      position: absolute;
-    }
   }
-  &:hover .currencies-hide {
-    display: block;
-  }
-  .currency-select {
-    &.active {
-      color: $col-orange;
+  .currency-selector-wrapper {
+    display: none;
+    position: absolute;
+    top: 48px;
+    background: rgba(0,0,0,.6);
+    left: -24px;
+    padding: 12px 24px;
+    a {
+      color: $col-white;
+      text-decoration: none;
     }
   }
 }

@@ -78,6 +78,12 @@
       var currency = $this.attr('data-currency');
       localStorage.setItem('selected_currency', currency);
       _switchCurrency(currency);
+      $('.currency-selector-wrapper').hide();
+      $('.selected-currency').text(currency);
+    });
+
+    $('.selected-currency').on('click', function() {
+      $('.currency-selector-wrapper').toggle();
     });
 
   </script>

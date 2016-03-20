@@ -64,8 +64,13 @@
             {% endif %}
           {% endif %}
           <li class="currency-nav-item">
-            <a href="javascript:;" data-currency="USD" class="currency-selector">USD</a>
-            <a href="javascript:;" data-currency="GBP" class="currency-selector">GBP</a>
+            <span class="selected-currency">USD</span>
+            <div class="currency-selector-wrapper">
+              <a href="javascript:;" data-currency="USD" class="currency-selector">USD</a>
+              <a href="javascript:;" data-currency="CAD" class="currency-selector">CAD</a>
+              <a href="javascript:;" data-currency="EUR" class="currency-selector">EUR</a>
+              <a href="javascript:;" data-currency="GBP" class="currency-selector">GBP</a>
+            </div>
           </li>
           <li class="search-nav-item"><a href="/search"></a></li>
           <li class="cart-nav-item"><a href="/cart">{{ cart.item_count }}</a></li>
