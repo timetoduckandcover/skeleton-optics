@@ -24,12 +24,13 @@
   {% include 'global-footer' %}
 
   <!-- Scripts -->
-  {% include 'global-scripts' %}
-  {% include 'global-inline-scripts' %}
+  {{ "//cdn.shopify.com/s/javascripts/currencies.js" | script_tag }}
+  {{ 'main.js' | asset_url | script_tag }}
 
-  <!-- Add ons -->
-  <!-- {% include 'currencies' %} -->
-  <!-- currencies script is throwing a JS error - to review -->
+  <!-- Needs to run on every page -currency converter -->
+  <script type="text/javascript">
+
+  </script>
 
 </body>
 </html>

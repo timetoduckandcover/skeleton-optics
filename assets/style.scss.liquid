@@ -155,6 +155,11 @@ body, input, textarea, select, button {
 .disable-click {
   pointer-events: none;
 }
+.form-with-spacing {
+  li {
+    margin-bottom: 12px;
+  }
+}
 
 /*------- Typography --------*/
 .lato-black {
@@ -238,10 +243,10 @@ input {
   text-decoration: none;
   @include transition;
   &:focus {outline: none;}
-  &:not([type=submit]) {
+  &:not([type=submit]):not([type=checkbox]) {
     width: 100%;
     max-width: 400px;
-    border: 1px solid $col-grey;
+    border: 1px solid $col-bordergrey;
     color: $col-black;
     border-radius: 2px;
     padding: 7px;
@@ -384,10 +389,11 @@ select {
 
 /* HEADER */
 header.global-header {
-  background: rgba(0,0,0,.6);
+  background: $col-black;
   z-index: 7000;
   height: 70px;
-  @include breakpoint(medium) {
+  @include breakpoint(large) {
+    background: rgba(0,0,0,.6);
     position: fixed;
     top: 0;
     left: 0;
@@ -405,20 +411,22 @@ header.global-header {
     position: absolute;
     top: 70px;
     right: 0;
-    background: rgba(0,0,0,.6);
+    background: $col-black;
     z-index: 7000;
     padding: 12px;
-    @include breakpoint(medium) {
+    @include breakpoint(large) {
       position: static;
       background: transparent;
       padding: 0;
     }
   }
   nav {
-    float: left;
+    @include breakpoint(large) {
+      float: left;
+    }
   }
   #header_meta {
-    @include breakpoint(medium) {
+    @include breakpoint(large) {
       float: right;
     }
   }
@@ -426,9 +434,11 @@ header.global-header {
     & > li {
       display: block;
       position: relative;
-      @include breakpoint(medium) {
+      margin-bottom: 6px;
+      @include breakpoint(large) {
         display: inline-block;
         margin-right: 12px;
+        margin-bottom: 0;
       }
       &.cart-nav-item {
         a {
@@ -465,22 +475,28 @@ header.global-header {
         text-decoration: none;
         display: block;
         color: $col-white;
-        @include breakpoint(medium) {
+        @include breakpoint(large) {
           line-height: 70px;
         }
         &:hover {
           color: $col-links-primary;
         }
+        .header-arrow {
+          display: none;
+          @include breakpoint(large) {
+            display: inline-block;
+          }
+        }
       }
       &:hover {
         .sub-nav {
-          @include breakpoint(medium) {
+          @include breakpoint(large) {
             display: block;
           }
         }
       }
       .sub-nav {
-        @include breakpoint(medium) {
+        @include breakpoint(large) {
           display: none;
           position: absolute;
           top: 70px;
@@ -493,7 +509,7 @@ header.global-header {
           a {
             color: $col-white;
             text-decoration: none;
-            text-transform: uppercase;
+            //text-transform: uppercase;
             line-height: 20px;
             &:hover {
               color: $col-links-primary;
@@ -1192,8 +1208,8 @@ footer.global-footer {
   right: 20px;
   width:18px;
   height:18px;
-  z-index: 99999999;
-  @include breakpoint(medium) {
+  z-index: 7000;
+  @include breakpoint(large) {
     display: none;
   }
   i {
