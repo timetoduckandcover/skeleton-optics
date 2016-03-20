@@ -838,12 +838,41 @@ main.global-site {
           border-radius: 3px;
           text-decoration: none;
           color: $col-white;
-          padding: 0 12px;
+          padding: 0 12px 0 31px;
           line-height: 24px;
+          position: relative;
+          &:before {
+            content: '';
+            width: 14px;
+            height: 14px;
+            background-size: 14px 14px;
+            display: block;
+            position: absolute;
+            left: 12px;
+            top: 5px;
+            background-repeat: no-repeat;
+            line-height: 24px;
+            margin-right: 2px;
+          }
         }
-        &.facebook a {background:#3b5998;}
-        &.twitter a {background:#55ACEE;}
-        &.pinterest a {background:#cb2027;}
+        &.facebook a {
+          background: #3b5998;
+          &:before {
+            background-image: url(facebook.png);
+          }
+        }
+        &.twitter a {
+          background: #55ACEE;
+          &:before {
+            background-image: url(twitter.png);
+          }
+        }
+        &.pinterest a {
+          background: #cb2027;
+          &:before {
+            background-image: url(pinterest.png);
+          }
+        }
       }
     }
   }
