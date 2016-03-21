@@ -70,6 +70,7 @@
       }
       currentCurrency = localStorage.selected_currency;
       _switchCurrency(currentCurrency);
+      $('.selected-currency').text(currentCurrency);
     };
     _checkCurrency();
 
