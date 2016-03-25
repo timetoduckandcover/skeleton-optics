@@ -14,9 +14,29 @@ jQuery( document ).ready(function($) {
 
   // Burger menu
   $('.burger').on("click", function() {
-    $(this).toggleClass('active');
-    $('.nav-wrapper').toggle();
+    var $this = $(this);
+    $this.toggleClass('active');
+    _handleMobileNav();
   });
+  function _handleMobileNav() {
+    if($('.burger').hasClass('active')) {
+      $('.nav-wrapper').show();
+    } else {
+      $('.nav-wrapper').hide();
+    }
+  };
+  function _resizeWindow() {
+    var windowsize = $(window).width();
+    if (windowsize > 1200) {
+      $('.nav-wrapper').show();
+    } else {
+      _handleMobileNav();
+    }
+  };
+  window.onresize = function() {
+    _resizeWindow();
+  };
+  _resizeWindow();
 
   // Add active class to product variant label on product pages
   // var variant_label = $('#product-variants li label');

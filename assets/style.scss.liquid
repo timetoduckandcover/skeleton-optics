@@ -365,15 +365,16 @@ select {
   .caption {
     text-align: center;
     @include centre;
+    padding: 0 20px;
     h1, span {
       color: $col-white;
-      //@extend .lato-black;
     }
     h1 {
       @include font(42);
       position: relative;
       padding-bottom: 10px;
       margin-bottom: 10px;
+      width: 100%;
       @include breakpoint(small) {
         @include font(60);
         padding-bottom: 20px;
@@ -392,6 +393,8 @@ select {
       }
     }
     span {
+      display: block;
+      width: 100%;
       @include font(20);
       @include breakpoint(small) {
         @include font(32);
@@ -432,11 +435,15 @@ header.global-header {
     position: absolute;
     top: 70px;
     right: 0;
+    left: 0;
     background: $col-black;
     z-index: 7000;
     padding: 12px;
+    @extend .cf;
+    display: none;
     @include breakpoint(large) {
       position: static;
+      display: block;
       background: transparent;
       padding: 0;
     }
