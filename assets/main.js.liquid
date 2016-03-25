@@ -60,16 +60,16 @@ jQuery( document ).ready(function($) {
 	$numinput.val( parseInt( $numinput.val(), 10 ) +1 );
   });
 
-  // Currency Switcher
-  var pageloadCurrency = $('.currency-select.selected').html();
-  $('#selected-currency').append(pageloadCurrency);
-  $('.currency-select').click(function() {
-    var activeCurrency = $('.currency-select.selected').html();
-    $('.currency-select').removeClass('active');
-    $(this).addClass('active');
-    //$('.currencies-hide').hide();
-    // $('#selected-currency').text(activeCurrency);
-  });
+  // // Currency Switcher
+  // var pageloadCurrency = $('.currency-select.selected').html();
+  // $('#selected-currency').append(pageloadCurrency);
+  // $('.currency-select').click(function() {
+  //   var activeCurrency = $('.currency-select.selected').html();
+  //   $('.currency-select').removeClass('active');
+  //   $(this).addClass('active');
+  //   //$('.currencies-hide').hide();
+  //   // $('#selected-currency').text(activeCurrency);
+  // });
 
   // Libs
   $('.flexslider').flexslider({
