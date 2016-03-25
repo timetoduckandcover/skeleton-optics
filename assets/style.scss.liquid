@@ -586,7 +586,10 @@ header.global-header {
 
 /* MAIN */
 main.global-site {
-  //padding-bottom: 60px;
+  padding-bottom: 60px;
+  &.index {
+    padding-bottom: 0;
+  }
   &.header-push {
     padding-top: 120px;
   }
@@ -1066,6 +1069,9 @@ main.global-site {
   margin: $baseline 0 $baseline/2 0;
   input {
     width: 100%;
+  }
+  .update-cart {
+    background: $col-darkgrey;  
   }
 }
 .additional-checkout-buttons {
