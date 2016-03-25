@@ -23,7 +23,7 @@
   <div class="collection-filters">
     <div class="filters-inner">
       <div class="filter-group">
-        <h4>By Style</h4>
+        <h6 class="uppercase">By Style</h6>
         {% for link in linklists.filters-style.links %}
           <label for="tag-{{ link.handle }}">
             <input type="checkbox" name="tag-{{ link.handle }}" class="tag-checkbox" data-tag="{{ link.handle }}" id="tag-{{ link.handle }}" />
@@ -32,7 +32,7 @@
         {% endfor %}
       </div>
       <div class="filter-group">
-        <h4>By Activity</h4>
+        <h6 class="uppercase">By Activity</h6>
         {% for link in linklists.filters-activity.links %}
           <label for="tag-{{ link.handle }}">
             <input type="checkbox" name="tag-{{ link.handle }}" class="tag-checkbox" data-tag="{{ link.handle }}" id="tag-{{ link.handle }}" />
@@ -41,14 +41,16 @@
         {% endfor %}
       </div>
       <div class="filter-group">
-        <h4>Frame Color</h4>
+        <h6 class="uppercase">Frame Color</h6>
         {% for link in linklists.filters-frame.links %}
           <label for="tag-{{ link.handle }}">
             <input type="checkbox" name="tag-{{ link.handle }}" class="tag-checkbox" data-tag="{{ link.handle }}" id="tag-{{ link.handle }}" />
             {{ link.handle }}
           </label>
         {% endfor %}
-        <h4>Lens Color</h4>
+      </div>
+      <div class="filter-group">
+        <h6 class="uppercase">Lens Color</h6>
         {% for link in linklists.filters-lens.links %}
           <label for="tag-{{ link.handle }}">
             <input type="checkbox" name="tag-{{ link.handle }}" class="tag-checkbox" data-tag="{{ link.handle }}" id="tag-{{ link.handle }}" />
@@ -57,7 +59,7 @@
         {% endfor %}
       </div>
       <div class="filter-group">
-        <h4>Price</h4>
+        <h6 class="uppercase">Price</h6>
         {% for link in linklists.filters-price.links %}
           <label for="tag-{{ link.handle }}">
             <input type="checkbox" name="tag-{{ link.handle }}" class="tag-checkbox" data-tag="{{ link.handle }}" id="tag-{{ link.handle }}" />
@@ -81,10 +83,7 @@
     // Check if path contains tags (3 index is something after collections/collectionName)
     if(PATH_LENGTH === 4 & PATH[3] !== "") {
       var tags = PATH[3].split('+');
-      $('.collection-filters').hide();
       _selectCheckboxes();
-    } else {
-      $('.collection-filters').show();
     }
 
     function _selectCheckboxes() {
@@ -122,8 +121,22 @@
     };
 
     $('.filters-header-toggle a').on('click', function() {
-      $('.collection-filters').toggle();
+      _toggleFilterArea();
     });
+
+    function _toggleFilterArea() {
+      var collection = $('.collection-filters');
+      collection.toggleClass('active');
+      if(collection.hasClass('active')) {
+        if($(window).width() > 1200) {
+          collection.css('display', 'table');
+        } else {
+          collection.css('display', 'block');
+        }
+      } else {
+        collection.css('display', 'none');
+      }
+    }
 
     $('.collection-paginate').on('change', function() {
       var items = $(this).val();
@@ -174,9 +187,9 @@
       if(localStorage.getItem('collection_style') !== null) {
         var style = localStorage.getItem('collection_style');
         $('.filters-switch-view a').removeClass('active');
-        $('.collection-item').removeClass('filter_grid filter_list col-sm-6 col-md-3').addClass(style);
+        $('.collection-item').removeClass('filter_grid filter_list col-sm-6 col-md-4').addClass(style);
         if(style === 'filter_grid') {
-          $('.collection-item').addClass('col-sm-6 col-md-3');
+          $('.collection-item').addClass('col-sm-6 col-md-4');
           $('.filters-switch-view .filter_grid').addClass('active');
         } else {
           $('.filters-switch-view .filter_list').addClass('active');

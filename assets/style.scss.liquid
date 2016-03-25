@@ -200,8 +200,11 @@ h3 {
 h4 {
   @include font(18);
 }
-h5, h6 {
+h5  {
   @include font(16);
+}
+h6 {
+  @include font(14);
 }
 span, strong, p, a, em {
   @include font(14);
@@ -297,6 +300,47 @@ select {
   background: $col-white;
   border: 1px solid $col-bordergrey;
   padding: 6px 12px;
+}
+
+.btn {
+  background: $col-yellow;
+  border-radius: 20px;
+  padding: 0 40px;
+  color: $col-white;
+  text-decoration: none;
+  display: inline-block;
+  text-transform: uppercase;
+  @include font(13);
+  line-height: 34px;
+}
+
+.product-qty-selector {
+  @extend .cf;
+  margin-right: 12px;
+  text-align: center;
+  a, input {
+    float: left;
+  }
+  a {
+    border: 1px solid $col-bordergrey;
+    text-decoration: none;
+    display: block;
+    width: 36px;
+    height: 32px;
+    color: $col-black;
+    @include font(17);
+    line-height: 32px;
+  }
+  input {
+    border-top: 1px solid $col-bordergrey !important;
+    border-bottom: 1px solid $col-bordergrey !important;
+    width:60px !important;
+    height: 32px;
+    text-align: center;
+    border-left: none !important;
+    border-right: none !important;
+    @include font(14);
+  }
 }
 
 .inline-form {
@@ -755,19 +799,28 @@ main.global-site {
     }
   }
   .collection-filters {
-    display: table;
-    table-layout: fixed;
     width: 100%;
+    display: none;
+    @include breakpoint(large) {
+      //display: table;
+      table-layout: fixed;
+    }
     .filters-inner {
-      display: table-row;
       width: 100%;
+      @include breakpoint(large) {
+        display: table-row;
+      }
       .filter-group {
-        display: table-cell;
-        width: 25%;
         padding: 12px;
         border-right: 1px solid $col-bordergrey;
         border-bottom: 1px solid $col-bordergrey;
+        border-left: 1px solid $col-bordergrey;
         @extend .cf;
+        @include breakpoint(large) {
+          display: table-cell;
+          width: 20%;
+          border-left: none;
+        }
         &:first-child {
           border-left: 1px solid $col-bordergrey;
         }
@@ -852,6 +905,11 @@ main.global-site {
 
 /* PRODUCT PAGE */
 #product {
+  padding-top: 40px;
+  text-align: center;
+  @include breakpoint(medium) {
+    text-align: left;
+  }
   h1 {
     margin-bottom: 40px;
   }
@@ -861,19 +919,39 @@ main.global-site {
   #product-description {
     margin-bottom: 20px;
   }
+  .product-details {
+    margin-top: 40px;
+    @include breakpoint(medium) {
+      margin-top: 0;
+    }
+  }
   .product-variants {
     ul {
-      @extend .cf;
       margin-bottom: 12px;
       li {
-        float: left;
+        display: inline-block;
         margin-right: 6px;
       }
+    }
+  }
+  .product-qty-selector {
+    float: none;
+    width: 132px;
+    margin: 0 auto 20px auto;
+    @include breakpoint(medium) {
+      float: left;
+      margin: 0 12px 0 0;
     }
   }
   #product-price {
     .price-display {
       @extend .cf;
+      display: inline-block;
+      text-align: center;
+      @include breakpoint(medium) {
+        display: block;
+        text-align: left;
+      }
       .product-price {
         @include font(40);
         color: $col-yellow;
@@ -888,38 +966,10 @@ main.global-site {
     }
     .product-price-bottom {
       @extend .cf;
-      .product-qty-selector {
-        @extend .cf;
-        float: left;
-        margin-right: 12px;
-        text-align: center;
-        a, input {
+      #add-to-cart {
+        @include breakpoint(medium) {
           float: left;
         }
-        a {
-          border: 1px solid $col-bordergrey;
-          text-decoration: none;
-          @extend .lato-black;
-          display: block;
-          width: 36px;
-          height: 32px;
-          color: $col-black;
-          @include font(17);
-          line-height: 32px;
-        }
-        input {
-          border-top: 1px solid $col-bordergrey;
-          border-bottom: 1px solid $col-bordergrey;
-          width:60px;
-          height: 32px;
-          text-align: center;
-          border-left: none;
-          border-right: none;
-          @include font(14);
-        }
-      }
-      #add-to-cart {
-        float: left;
         background: $col-yellow;
         border-radius: 20px;
         padding: 0 40px;
@@ -1107,29 +1157,25 @@ main.global-site {
   }
 }
 
+// .incrementors {
+//   .number {
+//     text-align: center;
+//     width: 40px;
+//     display: inline-block;
+//   }
+//   .plus, .minus {
+//     display: inline-block;
+//     text-decoration: none;
+//     color: $col-black;
+//     padding: 0 4px;
+//   }
+// }
 
-
-.incrementors {
-  .number {
-    text-align: center;
-    width: 40px;
-    display: inline-block;
-  }
-  .plus, .minus {
-    display: inline-block;
-    text-decoration: none;
-    color: $col-black;
-    padding: 0 4px;
-  }
-}
 .remove-item {
   width: 20px;
   text-decoration: none;
   color: $col-black;
 }
-
-#shipping-calculator {}
-
 
 /* LOGIN & REGISTER */
 #customer, #template {

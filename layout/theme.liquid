@@ -47,7 +47,7 @@
       }
     ];
 
-    function _switchCurrency(currency) {
+    function _switchCurrency(currency, product) {
       $('.money').each(function() {
         var $this = $(this);
         var amount = $this.attr('data-amount');
@@ -62,6 +62,22 @@
         var fullAmount = currencySymbol + formattedAmount;
         $this.text(fullAmount);
       });
+      if(product === 'product-page') {
+        $('.prod-money').each(function() {
+          var $this = $(this);
+          var amount = $this.attr('data-amount');
+          var convertedAmount = Currency.convert(amount, '{{shop.currency}}', currency);
+          var formattedAmount = convertedAmount.toFixed(2);
+          var currencySymbol = '$';
+          for(var i=0; i<symbols.length; i++) {
+            if(currency === symbols[i].currency) {
+              currencySymbol = symbols[i].symbol;
+            }
+          }
+          var fullAmount = currencySymbol + formattedAmount;
+          $this.text(fullAmount);
+        });
+      }
     };
 
     function _checkCurrency() {
@@ -77,8 +93,9 @@
     $('.currency-selector').on('click', function() {
       var $this = $(this);
       var currency = $this.attr('data-currency');
+      currentCurrency = currency;
       localStorage.setItem('selected_currency', currency);
-      _switchCurrency(currency);
+      _switchCurrency(currency, 'product-page');
       $('.currency-selector-wrapper').hide();
       $('.selected-currency').text(currency);
     });

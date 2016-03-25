@@ -197,6 +197,20 @@
     ]
   },
   {
+    "name": "Product",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Product Hero"
+      },
+      {
+        "type": "image",
+        "id": "product_hero.jpg",
+        "label": "Product Hero Image"
+      }
+    ]
+  },
+  {
     "name": "Footer",
     "settings": [
       {

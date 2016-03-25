@@ -77,14 +77,16 @@
               </div>
 
               <div class="col-sm-3 incrementors">
-                <a href="javascript:;" class="minus">-</a>
-                <input type="text" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" class="number" />
-                <a href="javascript:;" class="plus">+</a>
+                <div class="product-qty-selector">
+                  <a href="javascript:;" class="minus lato-thin">-</a>
+                  <input type="text" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" class="number lato-thin" />
+                  <a href="javascript:;" class="plus lato-thin">+</a>
+                </div>
               </div>
 
-              <div class="col-sm-2">
-                <span class="lato-thin">{{ variant.compare_at_price | money }}</span>
-                <span class="lato-thin">{{ item.line_price | money }}</span>
+              <div class="col-sm-2 lato-thin">
+                {{ variant.compare_at_price | money }}
+                {{ item.line_price | money }}
               </div>
 
               <div class="col-sm-1">
@@ -109,7 +111,7 @@
 
         <div class="row cart-meta">
           <div class="col-xs-12 col-sm-4">
-              <a href="{{ collection_url }}" class="underline lato-thin">Back to Shopping</a>
+              <a href="/collections/sunglasses" class="underline lato-thin">Back to Shopping</a>
           </div>
           <div class="col-xs-12 col-sm-3 col-sm-offset-5">
             <h3 class="lato-thin cf">

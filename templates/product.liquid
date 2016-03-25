@@ -1,119 +1,126 @@
-<div class="push-header">
-  <div class="wrapper" itemscope itemtype="http://schema.org/Product">
-    <input type="hidden" value="{{product.id}}" id="productId"/>
-    <input type="hidden" value="{{'style.css' | asset_url}}" id="assetUrl"/>
-    <div id="product">
-      <meta itemprop="url" content="{{ shop.url }}{{ product.url }}" />
-      <meta itemprop="image" content="{{ product | img_url: 'grande' }}" />
-      <div class="row">
-        <div class="product-photos col-xs-12 col-sm-6">
-          <div class="product-photo-container"></div>
-          <ul class="product-photo-thumbs row"></ul>
+<div class="full-page-banner">
+  <img src="{{ 'product_hero.jpg' | asset_url }}" alt="Product Hero" class="img-full" />
+  <div class="caption">
+    <h1 class="uppercase">Shop</h1>
+    <span class="uppercase">{{ collection.title }}</span>
+  </div>
+</div>
+<div class="wrapper" itemscope itemtype="http://schema.org/Product">
+  <input type="hidden" value="{{product.id}}" id="productId"/>
+  <input type="hidden" value="{{'style.css' | asset_url}}" id="assetUrl"/>
+  <div id="product">
+    <meta itemprop="url" content="{{ shop.url }}{{ product.url }}" />
+    <meta itemprop="image" content="{{ product | img_url: 'grande' }}" />
+    <div class="row">
+      <div class="product-photos col-xs-12 col-sm-6">
+        <div class="product-photo-container"></div>
+        <ul class="product-photo-thumbs row"></ul>
+      </div>
+      <div class="product-details col-xs-12 col-sm-6">
+        <h1 class="uppercase"></h1>
+        <div id="product-description" class="rte" itemprop="description">
+          <span class="block uppercase product-label">Quick Overview</span>
+          {{ product.description }}
         </div>
-        <div class="product-details col-xs-12 col-sm-6">
-          <h1 class="uppercase"></h1>
-          <div id="product-description" class="rte" itemprop="description">
-            <span class="block uppercase product-label">Quick Overview</span>
-            {{ product.description }}
-          </div>
-          <div class="product-variants">
-            <span class="block uppercase product-label">Select Frame</span>
-            <ul class="option1"></ul>
-            <span class="block uppercase product-label">Select Lens</span>
-            <ul class="option2"></ul>
-            <ul class="option3"></ul>
-            <ul class="option4"></ul>
-            <ul class="option5"></ul>
-          </div>
-          <div id="product-price" itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="delta">
-            <meta itemprop="priceCurrency" content="{{ shop.currency }}" />
-            {% if product.available %}
-            <link itemprop="availability" href="http://schema.org/InStock" />
-            {% else %}
-            <link itemprop="availability" href="http://schema.org/OutOfStock" />
-            {% endif %}
-            <p class="price-display">
-              <span class="product-price" itemprop="price"></span>
-              <span class="compare-at-price" itemprop="price"></span>
-            </p>
-            <div class="product-price-bottom">
-              <div class="product-qty-selector">
-                <a href="javascript:;" data-selector="dec">-</a>
-                <input type="text" value="1" disabled/>
-                <a href="javascript:;" data-selector="inc">+</a>
-              </div>
-              <a href="javascript:;" id="add-to-cart">Add to cart</a>
+        <div class="product-variants">
+          <span class="block uppercase product-label">Select Frame</span>
+          <ul class="option1"></ul>
+          <span class="block uppercase product-label">Select Lens</span>
+          <ul class="option2"></ul>
+          <ul class="option3"></ul>
+          <ul class="option4"></ul>
+          <ul class="option5"></ul>
+        </div>
+        <div id="product-price" itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="delta">
+          <meta itemprop="priceCurrency" content="{{ shop.currency }}" />
+          {% if product.available %}
+          <link itemprop="availability" href="http://schema.org/InStock" />
+          {% else %}
+          <link itemprop="availability" href="http://schema.org/OutOfStock" />
+          {% endif %}
+          <p class="price-display">
+            <span class="product-price prod-money" itemprop="price" data-amount=""></span>
+            <span class="compare-at-price prod-money" itemprop="price" data-amount=""></span>
+          </p>
+          <div class="product-price-bottom">
+            <div class="product-qty-selector">
+              <a href="javascript:;" data-selector="dec lato-black">-</a>
+              <input type="text" value="1" disabled/>
+              <a href="javascript:;" data-selector="inc lato-black">+</a>
             </div>
-          </div>
-          {% include 'wishlist-product' %}
-          <div class="share-product">
-            <ul class="no-list">
-              <li class="facebook">
-                <a href="javascript:;"
-                   onclick="window.open('http://www.facebook.com/sharer/sharer.php?u={{ canonical_url }}', 'targetWindow', 'width=600, height=400')">
-                  Share
-                </a>
-              </li>
-              <li class="twitter">
-                <a href="javascript:;"
-                   onclick="window.open('http://twitter.com/share?url={{ canonical_url }}', 'targetWindow', 'width=600, height=400')">
-                  Tweet
-                </a>
-              </li>
-              <li class="pinterest">
-                <a href="javascript:;"
-                   onclick="window.open('https://pinterest.com/pin/create/button/?url={{ canonical_url }}&media={{ featured_image | img_url: 'grande' }}', 'targetWindow', 'width=600, height=400')">
-                  Pin it
-                </a>
-              </li>
-            </ul>
+            <a href="javascript:;" id="add-to-cart">Add to cart</a>
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="product-accordion">
-            <ul class="accordion-headers">
-              <li>
-                <a href="javascript:;" data-index="1" class="active">Description</a>
-              </li>
-              <li>
-                <a href="javascript:;" data-index="2">Customer Review</a>
-              </li>
-              <li>
-                <a href="javascript:;" data-index="3">Delivery</a>
-              </li>
-              <li>
-                <a href="javascript:;" data-index="4">Warranty</a>
-              </li>
-              <li>
-                <a href="javascript:;" data-index="5">Payment</a>
-              </li>
-            </ul>
-            <ul class="accordion-content">
-              <li data-index="1">
-                {{product.metafields.description.copy}}
-              </li>
-              <li data-index="2">
-                <div id="shopify-product-reviews" data-id="{{ product.id }}">{{ product.metafields.spr.reviews }}</div>
-              </li>
-              <li data-index="3">
-                {{product.metafields.delivery.copy}}
-              </li>
-              <li data-index="4">
-                {{product.metafields.warranty.copy}}
-              </li>
-              <li data-index="5">
-                {{product.metafields.payment.copy}}
-              </li>
-            </ul>
-          </div>
+        <div class="wishlist">
+          wishlist
+        </div>
+        <div class="share-product">
+          <ul class="no-list">
+            <li class="facebook">
+              <a href="javascript:;"
+                 onclick="window.open('http://www.facebook.com/sharer/sharer.php?u={{ canonical_url }}', 'targetWindow', 'width=600, height=400')">
+                Share
+              </a>
+            </li>
+            <li class="twitter">
+              <a href="javascript:;"
+                 onclick="window.open('http://twitter.com/share?url={{ canonical_url }}', 'targetWindow', 'width=600, height=400')">
+                Tweet
+              </a>
+            </li>
+            <li class="pinterest">
+              <a href="javascript:;"
+                 onclick="window.open('https://pinterest.com/pin/create/button/?url={{ canonical_url }}&media={{ featured_image | img_url: 'grande' }}', 'targetWindow', 'width=600, height=400')">
+                Pin it
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
-      <noscript>
-        {% include 'product-noscript' %}
-      </noscript>
     </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="product-accordion">
+          <ul class="accordion-headers">
+            <li>
+              <a href="javascript:;" data-index="1" class="active">Description</a>
+            </li>
+            <li>
+              <a href="javascript:;" data-index="2">Customer Review</a>
+            </li>
+            <li>
+              <a href="javascript:;" data-index="3">Delivery</a>
+            </li>
+            <li>
+              <a href="javascript:;" data-index="4">Warranty</a>
+            </li>
+            <li>
+              <a href="javascript:;" data-index="5">Payment</a>
+            </li>
+          </ul>
+          <ul class="accordion-content">
+            <li data-index="1">
+              {{product.metafields.description.copy}}
+            </li>
+            <li data-index="2">
+              <div id="shopify-product-reviews" data-id="{{ product.id }}">{{ product.metafields.spr.reviews }}</div>
+            </li>
+            <li data-index="3">
+              {{product.metafields.delivery.copy}}
+            </li>
+            <li data-index="4">
+              {{product.metafields.warranty.copy}}
+            </li>
+            <li data-index="5">
+              {{product.metafields.payment.copy}}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <noscript>
+      {% include 'product-noscript' %}
+    </noscript>
   </div>
 </div>
 
@@ -309,11 +316,14 @@
           var newPrice = (selectedVariant.price * quantity).toFixed(2);
           var newCompareAtPrice = (selectedVariant.compare_at_price * quantity).toFixed(2);
           $('.product-price').text('$' + newPrice);
+          $('.product-price').attr('data-amount', newPrice);
           if(newPrice !== newCompareAtPrice) {
             $('.compare-at-price').text('$' + newCompareAtPrice);
+            $('.compare-at-price').attr('data-amount', newCompareAtPrice);
           } else {
             $('.compare-at-price').text("");
           }
+          _switchCurrency(currentCurrency, 'product-page');
         };
 
         // AJAX add to cart
