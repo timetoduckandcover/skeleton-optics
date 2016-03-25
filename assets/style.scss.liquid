@@ -6,6 +6,7 @@
 /*------- Colors --------*/
 $col-grey: #7e898b;
 $col-black: #1b1e23;
+$col-lightblack: #7e898b;
 $col-turq: #8ee2ec;
 $col-lightgrey: #f6f7f8;
 $col-darkgrey: #404040;
@@ -605,6 +606,30 @@ main.global-site {
             text-align: center;
             .home_slider-area-slide {
               padding: 0 20px;
+              &:hover {
+                h2 a, p {
+                  color: $col-lightblack;
+                }
+                h2:after {
+                  background: $col-lightblack;
+                }
+              }
+              h2 {
+                &:after {
+                  -webkit-transition: all, .6s ease;
+                  -moz-transition: all, .6s ease;
+                  -o-transition: all, .6s ease;
+                  transition: all, .6s ease;
+                }
+                a {
+                  color: $col-black;
+                  text-decoration: none;
+                  -webkit-transition: all, .6s ease;
+                  -moz-transition: all, .6s ease;
+                  -o-transition: all, .6s ease;
+                  transition: all, .6s ease;
+                }
+              }
               img {
                 margin-bottom: 12px;
               }
@@ -1071,7 +1096,7 @@ main.global-site {
     width: 100%;
   }
   .update-cart {
-    background: $col-darkgrey;  
+    background: $col-darkgrey;
   }
 }
 .additional-checkout-buttons {

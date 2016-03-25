@@ -17,11 +17,18 @@
                 {% capture img %}home_promo-{{i}}.jpg{% endcapture %}
                 {% capture title %}home_promo-title-{{i}}{% endcapture %}
                 {% capture copy %}home_promo-copy-{{i}}{% endcapture %}
+                {% capture link %}home_promo-link-{{i}}{% endcapture %}
                 <li class="col-xs-12 col-sm-4">
                   <div class="home_slider-area-slide">
-                    <img src="{{ img | asset_url }}" alt="" class="img-full" />
+                    <a href="{{settings[link]}}">
+                      <img src="{{ img | asset_url }}" alt="" class="img-full" />
+                    </a>
                     {% if settings[title] %}
-                      <h2 class="has-line uppercase">{{ settings[title] }}</h2>
+                      <h2 class="has-line uppercase">
+                        <a href="{{settings[link]}}">
+                          {{ settings[title] }}
+                        </a>
+                      </h2>
                     {% endif %}
                     {% if settings[copy] %}
                       <p>{{ settings[copy] }}</p>
@@ -37,11 +44,18 @@
                 {% capture img %}home_promo-{{i}}.jpg{% endcapture %}
                 {% capture title %}home_promo-title-{{i}}{% endcapture %}
                 {% capture copy %}home_promo-copy-{{i}}{% endcapture %}
+                {% capture link %}home_promo-link-{{i}}{% endcapture %}
                 <li class="col-xs-12 col-sm-4">
                   <div class="home_slider-area-slide">
-                    <img src="{{ img | asset_url }}" alt="" class="img-full" />
+                    <a href="{{settings[link]}}">
+                      <img src="{{ img | asset_url }}" alt="" class="img-full" />
+                    </a>
                     {% if settings[title] %}
-                      <h2 class="has-line uppercase">{{ settings[title] }}</h2>
+                      <h2 class="has-line uppercase">
+                        <a href="{{settings[link]}}">
+                          {{ settings[title] }}
+                        </a>
+                      </h2>
                     {% endif %}
                     {% if settings[copy] %}
                       <p>{{ settings[copy] }}</p>

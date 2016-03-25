@@ -76,6 +76,11 @@
         "label": "Home promo 1 Copy"
       },
       {
+        "type": "text",
+        "id": "home_promo-link-1",
+        "label": "Home promo 1 Link"
+      },
+      {
         "type": "image",
         "id": "home_promo-2.jpg",
         "label": "Home Promo 2 Image"
@@ -89,6 +94,11 @@
         "type": "textarea",
         "id": "home_promo-copy-2",
         "label": "Home promo 2 Copy"
+      },
+      {
+        "type": "text",
+        "id": "home_promo-link-2",
+        "label": "Home promo 2 Link"
       },
       {
         "type": "image",
@@ -106,6 +116,11 @@
         "label": "Home promo 3 Copy"
       },
       {
+        "type": "text",
+        "id": "home_promo-link-3",
+        "label": "Home promo 3 Link"
+      },
+      {
         "type": "image",
         "id": "home_promo-4.jpg",
         "label": "Home Promo 4 Image"
@@ -119,6 +134,11 @@
         "type": "textarea",
         "id": "home_promo-copy-4",
         "label": "Home promo 4 Copy"
+      },
+      {
+        "type": "text",
+        "id": "home_promo-link-4",
+        "label": "Home promo 4 Link"
       },
       {
         "type": "image",
@@ -136,6 +156,11 @@
         "label": "Home promo 5 Copy"
       },
       {
+        "type": "text",
+        "id": "home_promo-link-5",
+        "label": "Home promo 5 Link"
+      },
+      {
         "type": "image",
         "id": "home_promo-6.jpg",
         "label": "Home Promo 6 Image"
@@ -149,6 +174,11 @@
         "type": "textarea",
         "id": "home_promo-copy-6",
         "label": "Home promo 6 Copy"
+      },
+      {
+        "type": "text",
+        "id": "home_promo-link-6",
+        "label": "Home promo 6 Link"
       }
     ]
   },
