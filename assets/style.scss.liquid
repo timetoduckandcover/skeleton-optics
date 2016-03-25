@@ -80,9 +80,13 @@ $baseline: 20px;
 }
 
 /*------- Main Setup --------*/
-::selection { }
 html, body { height: 100%;}
-html { font-size: 100%;}
+html {
+  font-size: 90%;
+  @include breakpoint(medium) {
+    font-size: 100%;
+  }
+}
 body {
   color: $col-body;
   line-height: 1.6;
@@ -143,7 +147,10 @@ body, input, textarea, select, button {
   display: block;
 }
 .push-header {
-  padding-top: 100px;
+  padding-top: 20px;
+  @include breakpoint(large) {
+    padding-top: 100px;
+  }
 }
 .sprite {
   background-image: url(sprite.png);
@@ -363,10 +370,18 @@ select {
       //@extend .lato-black;
     }
     h1 {
-      @include font(70);
+      @include font(42);
       position: relative;
-      padding-bottom: 20px;
-      margin-bottom: 20px;
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+      @include breakpoint(small) {
+        @include font(60);
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+      }
+      @include breakpoint(medium) {
+        @include font(70);
+      }
       &:after {
         content: '';
         width: 80px;
@@ -377,7 +392,13 @@ select {
       }
     }
     span {
-      @include font(44);
+      @include font(20);
+      @include breakpoint(small) {
+        @include font(32);
+      }
+      @include breakpoint(medium) {
+        @include font(44);
+      }
     }
   }
 }
@@ -566,6 +587,9 @@ main.global-site {
             text-align: center;
             .home_slider-area-slide {
               padding: 0 20px;
+              img {
+                margin-bottom: 12px;
+              }
               p {
                 @extend .lato-thin;
               }
@@ -577,25 +601,44 @@ main.global-site {
   }
   .home_promo-text {
     max-width: 600px;
-    margin: 100px auto;
+    margin: 40px auto;
+    padding: 0 20px;
+    @include breakpoint(medium) {
+      margin: 100px auto;
+    }
     span {
       display: block;
-      @include font(40);
+      @include font(20);
       @extend .lato-thin;
+      @include breakpoint(small) {
+        @include font(30);
+      }
+      @include breakpoint(medium) {
+        @include font(40);
+      }
     }
   }
   .home_collection {
     .featured-product {
       width: 100%;
-      margin-top: 60px;
+      margin-top: 80px;
       .featured-product-right {
-        text-align: left;
+        text-align: center;
+        @include breakpoint(medium) {
+          text-align: left;
+        }
         .line {
           height: 5px;
           width: 70px;
           background: $col-black;
-          margin: 14px 0 0 0;
+          margin: 14px 0 0 -35px;
+          left: 50%;
+          position: relative;
           display: block;
+          @include breakpoint(medium) {
+            margin: 14px 0 0 0;
+            left: 0;
+          }
         }
         p {
           @extend .lato-thin;
