@@ -119,7 +119,7 @@ body, input, textarea, select, button {
 .mt {margin-top: $baseline;}
 .mtt {margin-top: $baseline*2;}
 .uppercase {text-transform:uppercase;}
-.section-padding {padding: 40px 0;}
+.section-padding {padding: 60px 0 40px 0;}
 .center {
     position: absolute;
     left: 50%;
@@ -550,7 +550,7 @@ header.global-header {
 
 /* MAIN */
 main.global-site {
-  padding-bottom: 60px;
+  //padding-bottom: 60px;
   &.header-push {
     padding-top: 120px;
   }
@@ -566,6 +566,9 @@ main.global-site {
             text-align: center;
             .home_slider-area-slide {
               padding: 0 20px;
+              p {
+                @extend .lato-thin;
+              }
             }
           }
         }
@@ -578,6 +581,7 @@ main.global-site {
     span {
       display: block;
       @include font(40);
+      @extend .lato-thin;
     }
   }
   .home_collection {
@@ -592,6 +596,9 @@ main.global-site {
           background: $col-black;
           margin: 14px 0 0 0;
           display: block;
+        }
+        p {
+          @extend .lato-thin;
         }
       }
     }
