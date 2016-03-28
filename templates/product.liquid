@@ -213,16 +213,26 @@
         var option = 'option' + (i+1);
         var name = selectedVariant[option];
         array.push(name);
-      }
+      };
       var newTitle = array.join(' / ');
       selectedVariant.title = newTitle;
+      var variantExists = false;
       for(var j=0; j<product.variants.length; j++) {
         if(newTitle === product.variants[j].title) {
+          variantExists = true;
           var variant = product.variants[j];
           selectedVariant.id = variant.id;
           selectedVariant.price = variant.price;
           selectedVariant.compare_at_price = variant.compare_at_price;
+          selectedVariant.quantity = variant.inventory_quantity;
         }
+      };
+      if(!variantExists) {
+        $('#add-to-cart').text('Not Available').addClass('disabled disable-click');
+      } else if(selectedVariant.quantity === 0) {
+        $('#add-to-cart').text('Sold Out!').addClass('disabled disable-click');
+      } else {
+        $('#add-to-cart').text('Add to Cart').removeClass('disabled disable-click');
       }
       _calculateDisplayPrice();
     };
@@ -271,6 +281,7 @@
         product = res.product;
       }
     }).done(function() {
+      console.log(product);
       _injectTitle();
       _injectImages();
       _splitVariants();
