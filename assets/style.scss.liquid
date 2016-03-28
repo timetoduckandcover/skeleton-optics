@@ -834,6 +834,26 @@ main.global-site {
           input {
             width: auto;
           }
+          img {
+            &.active {
+              box-shadow: 2px 2px 1px 1px rgba(0,0,0,.2);
+            }
+          }
+        }
+        &.hide-input {
+          label {
+            width: auto;
+            margin-right: 4px;
+            &:hover {
+              cursor: pointer;
+            }
+            input {
+              position: absolute;
+              left: -999999px;
+              visibility: hidden;
+              display: none;
+            }
+          }
         }
       }
     }

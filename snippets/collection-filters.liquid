@@ -40,21 +40,23 @@
           </label>
         {% endfor %}
       </div>
-      <div class="filter-group">
+      <div class="filter-group hide-input">
         <h6 class="uppercase">Frame Color</h6>
-        {% for link in linklists.filters-frame.links %}
+        {% for link in linklists.filters-frames.links %}
+          {% capture imageLink %}{{link.handle}}.png{% endcapture %}
           <label for="tag-{{ link.handle }}">
             <input type="checkbox" name="tag-{{ link.handle }}" class="tag-checkbox" data-tag="{{ link.handle }}" id="tag-{{ link.handle }}" />
-            {{ link.handle }}
+            <img src="{{ imageLink | asset_url }}" alt="" />
           </label>
         {% endfor %}
       </div>
-      <div class="filter-group">
+      <div class="filter-group hide-input">
         <h6 class="uppercase">Lens Color</h6>
         {% for link in linklists.filters-lens.links %}
+          {% capture imageLink %}{{link.handle}}.png{% endcapture %}
           <label for="tag-{{ link.handle }}">
             <input type="checkbox" name="tag-{{ link.handle }}" class="tag-checkbox" data-tag="{{ link.handle }}" id="tag-{{ link.handle }}" />
-            {{ link.handle }}
+            <img src="{{ imageLink | asset_url }}" alt="" />
           </label>
         {% endfor %}
       </div>
@@ -92,6 +94,7 @@
         $('.tag-checkbox').each(function() {
           if($(this).attr('data-tag') === tag) {
             $(this).attr('checked', 'checked');
+            $(this).next('img').addClass('active');
           }
         });
       }
