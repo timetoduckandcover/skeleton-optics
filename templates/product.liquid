@@ -6,8 +6,6 @@
   </div>
 </div>
 <div class="wrapper" itemscope itemtype="http://schema.org/Product">
-  <input type="hidden" value="{{product.id}}" id="productId"/>
-  <input type="hidden" value="{{'style.css' | asset_url}}" id="assetUrl"/>
   <div id="product">
     <meta itemprop="url" content="{{ shop.url }}{{ product.url }}" />
     <meta itemprop="image" content="{{ product | img_url: 'grande' }}" />
@@ -23,13 +21,9 @@
           {{ product.description }}
         </div>
         <div class="product-variants">
-          <span class="block uppercase product-label">Select Frame</span>
+          <!-- <span class="block uppercase product-label">Select Frame</span>
           <ul class="option1"></ul>
-          <span class="block uppercase product-label">Select Lens</span>
-          <ul class="option2"></ul>
-          <ul class="option3"></ul>
-          <ul class="option4"></ul>
-          <ul class="option5"></ul>
+          <span class="block uppercase product-label">Select Lens</span> -->
         </div>
         <div id="product-price" itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="delta">
           <meta itemprop="priceCurrency" content="{{ shop.currency }}" />
@@ -44,9 +38,9 @@
           </p>
           <div class="product-price-bottom">
             <div class="product-qty-selector">
-              <a href="javascript:;" data-selector="dec lato-black">-</a>
+              <a href="javascript:;" data-selector="dec" class="lato-black">-</a>
               <input type="text" value="1" disabled/>
-              <a href="javascript:;" data-selector="inc lato-black">+</a>
+              <a href="javascript:;" data-selector="inc" class="lato-black">+</a>
             </div>
             <a href="javascript:;" id="add-to-cart">Add to cart</a>
           </div>
@@ -127,33 +121,18 @@
 <script type="text/javascript">
   jQuery(document).ready(function($) {
 
-    var productWrapper = $('#product');
-    var productId = $('#productId').val();
     var product;
-    var assetUrl = $('#assetUrl').val().split('/');
     var selectedVariant = null;
+    var variants = [];
     var quantity = 1;
-    assetUrl.splice(-1,1);
-    assetUrl = assetUrl.join('/');
+    var variantArea = $('.product-variants');
 
-    $.ajax({
-      url: window.location.origin + '/admin/products/' + productId + '.json',
-      success: function(res) {
-        product = res.product;
-      }
-    }).done(function() {
-
-      // console.log(product);
-
-      _splitVariants();
-
-      // Append title
+    function _injectTitle() {
       $('.product-details h1').text(product.title);
+    };
 
-      // Append Featured Image
+    function _injectImages() {
       $('.product-photo-container').append('<img src="' + product.image.src + '" class="img-full" />');
-
-      //Append Thumbs
       if(product.images.length > 1) {
         for(var i=1; i<product.images.length; i++) {
           $('.product-photo-thumbs').append(
@@ -165,213 +144,181 @@
           );
         }
       }
+    };
 
-      // Switch product image on thumb click
-      $('.product-photo-thumbs a').on('click', function() {
-        var $this = $(this);
-        var thumbSrc = $this.find('img').attr('src');
-        var prodSrc = $('.product-photo-container img').attr('src');
-        $this.find('img').attr('src', prodSrc);
-        $('.product-photo-container img').attr('src', thumbSrc);
+    // Get cart count
+    function _getCart() {
+      $.ajax({
+        url: '/cart.js'
+      }).always(function(cart){
+        var obj = jQuery.parseJSON(cart.responseText);
+        var count = obj.item_count;
+        $('.cart-nav-item a').text(count);
       });
+    };
 
-      // Split variants response
-      function _splitVariants() {
-        var variants = {
-          option1: [],
-          option2: [],
-          option3: [],
-          option4: [],
-          option5: []
+    function _splitVariants() {
+      for(var i=0; i<product.options.length; i++) {
+        variantArea.append(
+          '<div class="variant-group-' + i + '">' +
+            '<ul></ul>' +
+          '</div>'
+        );
+
+        // Push variant object to variants array
+        variants.push({
+          name: product.options[i].name,
+          values: product.options[i].values
+        });
+
+        // Append each variant as a list item
+        for(var j=0; j<variants[i].values.length; j++) {
+          var name = variants[i].values[j];
+          var nameLower = name.toLowerCase();
+          var title = variants[i].name.split(' ').join('-').toLowerCase();
+          var fileName = '{{ "variant-'+title+'-'+nameLower+'.png" | asset_url }}';
+          var image = '<img src="' + fileName + '" />';
+          var group = 'option' + (i + 1);
+          $(".variant-group-" + i + " ul").append(
+            '<li>' +
+              '<a href="javascript:;" data-name="' + name + '" data-group-index="' + group + '" class="product-variant-selector">' +
+                image +
+              '</a>' +
+            '</li>'
+          );
         };
-        for(var i=0; i<product.variants.length; i++) {
+      };
+    };
 
-          // Set default variant if empty object
-          if(selectedVariant === null) {
-            obj = {
-              id: product.variants[0].id,
-              title: product.variants[0].title,
-              option1: product.variants[0].option1,
-              option2: product.variants[0].option2,
-              price: product.variants[0].price,
-              compare_at_price: product.variants[0].compare_at_price,
-              quantity: product.variants[0].inventory_quantity
-            };
-            _setDefaultVariant(obj);
-          }
+    function _setDefaultVariant() {
+      var variant = product.variants[0];
+      selectedVariant = {
+        id: variant.id,
+        title: variant.title,
+        price: variant.price,
+        compare_at_price: variant.compare_at_price,
+        quantity: variant.inventory_quantity
+      };
+      for(var i=0; i<product.options.length; i++) {
+        var option = 'option' + (i + 1);
+        selectedVariant[option] = variant[option];
+      };
+      _calculateDisplayPrice();
+    };
 
-          var obj = product.variants[i];
-          // console.log(obj);
-          if(obj.hasOwnProperty('option1') && obj.option1 !== null) {
-            var option1 = obj.option1;
-            if(variants.option1.indexOf(option1) === -1) {
-              variants.option1.push(option1);
-            }
-          }
-          if(obj.hasOwnProperty('option2') && obj.option2 !== null) {
-            var option2 = obj.option2;
-            if(variants.option2.indexOf(option2) === -1) {
-              variants.option2.push(option2);
-            }
-          }
-          if(obj.hasOwnProperty('option3') && obj.option3 !== null) {
-            var option3 = obj.option3;
-            if(variants.option3.indexOf(option3) === -1) {
-              variants.option3.push(option3);
-            }
-          }
-          if(obj.hasOwnProperty('option4') && obj.option4 !== null) {
-            var option4 = obj.option4;
-            if(variants.option4.indexOf(option4) === -1) {
-              variants.option4.push(option4);
-            }
-          }
-          if(obj.hasOwnProperty('option5') && obj.option5 !== null) {
-            var option5 = obj.option5;
-            if(variants.option5.indexOf(option5) === -1) {
-              variants.option5.push(option5);
-            }
-          }
+    function _setNewVariant(name, option) {
+      selectedVariant[option] = name;
+      var array = [];
+      for(var i=0; i<product.options.length; i++) {
+        var option = 'option' + (i+1);
+        var name = selectedVariant[option];
+        array.push(name);
+      }
+      var newTitle = array.join(' / ');
+      selectedVariant.title = newTitle;
+      for(var j=0; j<product.variants.length; j++) {
+        if(newTitle === product.variants[j].title) {
+          var variant = product.variants[j];
+          selectedVariant.id = variant.id;
+          selectedVariant.price = variant.price;
+          selectedVariant.compare_at_price = variant.compare_at_price;
         }
-        setTimeout(function() {
-          _createVariants();
-        }, 1000);
+      }
+      _calculateDisplayPrice();
+    };
 
-        // Create variants in DOM
-        function _createVariants() {
-          if(variants.option1.length) {
-            for(var i=0; i<variants.option1.length; i++) {
-              var handle = variants.option1[i].toLowerCase();
-              $('.product-variants .option1').append(
-                '<li>'+
-                  '<a href="javascript:;" data-name="' + variants.option1[i] + '" data-option="option1" class="product-variant-selector">'+
-                    '<img src="' + assetUrl + '/variant-frame-' + handle + '.png"  />'+
-                  '</a>'+
-                '</li>'
-              );
-            }
-          }
-          if(variants.option2.length) {
-            for(var i=0; i<variants.option2.length; i++) {
-              var handle = variants.option1[i].toLowerCase();
-              $('.product-variants .option2').append(
-                '<li>'+
-                  '<a href="javascript:;" data-name="' + variants.option2[i] + '" data-option="option2" class="product-variant-selector">'+
-                    '<img src="' + assetUrl + '/variant-frame-' + handle + '.png"  />'+
-                  '</a>'+
-                '</li>'
-              );
-            }
-          }
-        };
+    // Handles variant changes
+    $('body').on('click', '.product-variant-selector', function() {
+      var $this = $(this);
+      var name = $this.attr('data-name');
+      var option = $this.attr('data-group-index');
+      _setNewVariant(name, option);
+    });
 
-        // Set default variants
-        function _setDefaultVariant(obj) {
-          selectedVariant = obj;
-          _calculateDisplayPrice();
-        };
+    function _calculateDisplayPrice() {
+      var newPrice = (selectedVariant.price * quantity).toFixed(2);
+      var newCompareAtPrice = (selectedVariant.compare_at_price * quantity).toFixed(2);
+      $('.product-price').text('$' + newPrice);
+      $('.product-price').attr('data-amount', newPrice);
+      if(newPrice !== newCompareAtPrice) {
+        $('.compare-at-price').text('$' + newCompareAtPrice);
+        $('.compare-at-price').attr('data-amount', newCompareAtPrice);
+      } else {
+        $('.compare-at-price').text("");
+      }
+      _switchCurrency(currentCurrency, 'product-page');
+    };
 
-        // Callback to handle variant changes
-        function _setNewVariant(name, option) {
-          selectedVariant[option] = name;
-          selectedVariant.title = selectedVariant.option1 + ' / ' + selectedVariant.option2;
-          for(var i=0; i<product.variants.length; i++) {
-            var title = product.variants[i].title;
-            if(selectedVariant.title === title) {
-              selectedVariant.id = product.variants[i].id;
-              selectedVariant.price = product.variants[i].price;
-              selectedVariant.quantity = product.variants[i].inventory_quantity;
-              _calculateDisplayPrice();
-            }
-          }
-        };
+   $('.product-qty-selector a').on('click', function() {
+      var $this = $(this);
+      var input = $('.product-qty-selector input');
+      var inputVal = Number(input.val());
+      if($this.attr('data-selector') === 'dec') {
+        if(inputVal !== 1) {
+          input.val(inputVal - 1);
+          quantity = inputVal - 1;
+        }
+      } else {
+        input.val(inputVal + 1);
+        quantity = inputVal + 1;
+      }
+      _calculateDisplayPrice();
+    });
 
-        // Handles variant changes
-        $('body').on('click', '.product-variant-selector', function() {
-          var $this = $(this);
-          var name = $this.attr('data-name');
-          var option = $this.attr('data-option');
-          _setNewVariant(name, option);
-        });
-
-        // Handle product quantity changes
-        $('.product-qty-selector a').on('click', function() {
-          var $this = $(this);
-          var input = $('.product-qty-selector input');
-          var inputVal = Number(input.val());
-          if($this.attr('data-selector') === 'dec') {
-            if(inputVal !== 1) {
-              input.val(inputVal - 1);
-              quantity = inputVal - 1;
-            }
-          } else {
-            input.val(inputVal + 1);
-            quantity = inputVal + 1;
-          }
-          _calculateDisplayPrice();
-        });
-
-        // Calculate on screen display price
-        function _calculateDisplayPrice() {
-          var newPrice = (selectedVariant.price * quantity).toFixed(2);
-          var newCompareAtPrice = (selectedVariant.compare_at_price * quantity).toFixed(2);
-          $('.product-price').text('$' + newPrice);
-          $('.product-price').attr('data-amount', newPrice);
-          if(newPrice !== newCompareAtPrice) {
-            $('.compare-at-price').text('$' + newCompareAtPrice);
-            $('.compare-at-price').attr('data-amount', newCompareAtPrice);
-          } else {
-            $('.compare-at-price').text("");
-          }
-          _switchCurrency(currentCurrency, 'product-page');
-        };
-
-        // AJAX add to cart
-        $('#add-to-cart').on('click', function() {
-          $.ajax({
-            url: window.location.origin + '/cart/add.js',
-            data: {
-              id: selectedVariant.id,
-              quantity: quantity
-            },
-            method: 'POST',
-            beforeSend: function() {
-              $('#add-to-cart').text('Adding to cart...').addClass('disabled disable-click');
-            }
-          }).always(function() {
-            _getCart();
-            setTimeout(function() {
-              $('#add-to-cart').text('Thank you!').removeClass('disabled');
-            }, 500);
-            setTimeout(function() {
-              $('#add-to-cart').text('Add to Cart').removeClass('disable-click');
-            }, 4000);
-          });
-        });
-
-        // Product accordion
-        $('.accordion-headers li a').on('click', function() {
-          var $this = $(this);
-          var clickIndex = $this.attr('data-index');
-          var content = $('.accordion-content li[data-index="' + clickIndex + '"]');
-          $('.accordion-headers li a').removeClass('active');
-          $this.addClass('active');
-          $('.accordion-content li').hide();
-          content.show();
-        });
-      };
-
-      // Get cart count
-      function _getCart() {
-        $.ajax({
-          url: '/cart.js'
-        }).always(function(cart){
-          var obj = jQuery.parseJSON(cart.responseText);
-          var count = obj.item_count;
-          $('.cart-nav-item a').text(count);
-        });
-      };
+    $.ajax({
+      url: window.location.origin + '/admin/products/{{product.id}}.json',
+      success: function(res) {
+        product = res.product;
+      }
+    }).done(function() {
+      _injectTitle();
+      _injectImages();
+      _splitVariants();
+      _setDefaultVariant();
       _getCart();
+    });
+
+    // AJAX add to cart
+    $('#add-to-cart').on('click', function() {
+      $.ajax({
+        url: window.location.origin + '/cart/add.js',
+        data: {
+          id: selectedVariant.id,
+          quantity: quantity
+        },
+        method: 'POST',
+        beforeSend: function() {
+          $('#add-to-cart').text('Adding to cart...').addClass('disabled disable-click');
+        }
+      }).always(function() {
+        _getCart();
+        setTimeout(function() {
+          $('#add-to-cart').text('Thank you!').removeClass('disabled');
+        }, 500);
+        setTimeout(function() {
+          $('#add-to-cart').text('Add to Cart').removeClass('disable-click');
+        }, 4000);
+      });
+    });
+
+    // Product accordion
+    $('.accordion-headers li a').on('click', function() {
+      var $this = $(this);
+      var clickIndex = $this.attr('data-index');
+      var content = $('.accordion-content li[data-index="' + clickIndex + '"]');
+      $('.accordion-headers li a').removeClass('active');
+      $this.addClass('active');
+      $('.accordion-content li').hide();
+      content.show();
+    });
+
+    // Switch product image on thumb click
+    $('.product-photo-thumbs a').on('click', function() {
+      var $this = $(this);
+      var thumbSrc = $this.find('img').attr('src');
+      var prodSrc = $('.product-photo-container img').attr('src');
+      $this.find('img').attr('src', prodSrc);
+      $('.product-photo-container img').attr('src', thumbSrc);
     });
   });
 </script>
