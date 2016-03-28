@@ -252,9 +252,13 @@
       $('.product-price').attr('data-amount', newPrice);
       if(newPrice !== newCompareAtPrice) {
         $('.compare-at-price').text('$' + newCompareAtPrice);
-        $('.compare-at-price').attr('data-amount', newCompareAtPrice);
+        if(newCompareAtPrice === '0.00') {
+          $('.compare-at-price').text("").attr('data-amount', '0.00');
+        } else {
+          $('.compare-at-price').attr('data-amount', newCompareAtPrice);
+        }
       } else {
-        $('.compare-at-price').text("");
+        $('.compare-at-price').text("").attr('data-amount', '0.00');
       }
       _switchCurrency(currentCurrency, 'product-page');
     };
@@ -271,6 +275,11 @@
       } else {
         input.val(inputVal + 1);
         quantity = inputVal + 1;
+      }
+      if(quantity > selectedVariant.quantity) {
+        $('#add-to-cart').text('Sold Out!').addClass('disabled disable-click');
+      } else {
+        $('#add-to-cart').text('Add to Cart').removeClass('disabled disable-click');
       }
       _calculateDisplayPrice();
     });
