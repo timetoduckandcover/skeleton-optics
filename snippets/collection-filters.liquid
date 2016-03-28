@@ -167,6 +167,9 @@
             $this.hide();
           }
         });
+      } else {
+        $('.products-count-start').text('1');
+        $('.products-displayed').text('{{collection.products.size}}');
       }
     };
     _setPagination();
@@ -195,7 +198,7 @@
           $('.filters-switch-view .filter_list').addClass('active');
         }
       } else {
-        $('.collection-item').addClass('filter_grid');
+        $('.collection-item').addClass('filter_grid col-sm-6 col-md-4');
         $('.filters-switch-view .filter_grid').addClass('active');
       }
     };
