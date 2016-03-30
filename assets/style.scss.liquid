@@ -748,8 +748,10 @@ main.global-site {
     .filters-header-inner {
       @extend .cf;
       .filters-header-toggle {
-        float: left;
-        height: 44px;
+        @include breakpoint(large) {
+          float: left;
+          height: 44px;
+        }
         a {
           display: inline-block;
           padding: 12px;
@@ -764,7 +766,9 @@ main.global-site {
       }
       .filters-header-options {
         @extend .cf;
-        float: right;
+        @include breakpoint(large) {
+          float: right;
+        }
         .filters-switch-view {
           float: left;
           @extend .cf;
