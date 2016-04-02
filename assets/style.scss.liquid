@@ -1084,10 +1084,14 @@ main.global-site {
     }
   }
 
-  .product-accordion {
+  .product-accordion-desktop {
+    display: none;
     @extend .cf;
     margin-top: 60px;
     border: 1px solid $col-bordergrey;
+    @include breakpoint(medium) {
+      display: block;
+    }
     .accordion-headers {
       float: left;
       width: 300px;
@@ -1123,6 +1127,50 @@ main.global-site {
         &:first-child {
           display: block;
         }
+      }
+    }
+  }
+
+  .product-accordion-mobile {
+    display: block;
+    margin-top: 60px;
+    @include breakpoint(medium) {
+      display: none;
+    }
+    .accordion-mobile {
+      li {
+        &:first-child {
+          .accordion-mobile-button {
+            border-top: 1px solid $col-bordergrey;
+          }
+        }
+        .accordion-mobile-button {
+          background: $col-lightgrey;
+          text-decoration: none;
+          text-transform: uppercase;
+          display: block;
+          padding: 12px;
+          color: $col-black;
+          border-bottom: 1px solid $col-bordergrey;
+          border-left: 1px solid $col-bordergrey;
+          border-right: 1px solid $col-bordergrey;
+          @extend .lato-black;
+          &.active {
+            background: $col-white;
+            color: $col-yellow;
+          }
+        }
+        .accordion-mobile-content {
+          //display: none;
+          //min-height: 40px;
+          background: $col-white;
+          padding: 20px;
+        }
+        // &.active {
+        //   .accordion-mobile-content {
+        //     display: block;
+        //   }
+        // }
       }
     }
   }

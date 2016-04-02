@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-xs-12">
-    <div class="product-accordion">
+    <div class="product-accordion-desktop">
       <ul class="accordion-headers">
         <li>
           <a href="javascript:;" data-index="1" class="active">Description</a>
@@ -36,6 +36,40 @@
         </li>
       </ul>
     </div>
+    <div class="product-accordion-mobile">
+      <ul class="accordion-mobile">
+        <li class="active">
+          <a href="javascript:;" data-index="1" class="accordion-mobile-button">Description</a>
+          <div class="accordion-mobile-content">
+            {{ product.description }}
+          </div>
+        </li>
+        <li>
+          <a href="javascript:;" data-index="2" class="accordion-mobile-button">Customer Review</a>
+          <div class="accordion-mobile-content">
+            <div id="shopify-product-reviews" data-id="{{ product.id }}">{{ product.metafields.spr.reviews }}</div>
+          </div>
+        </li>
+        <li>
+          <a href="javascript:;" data-index="3" class="accordion-mobile-button">Delivery</a>
+          <div class="accordion-mobile-content">
+            {{product.metafields.delivery.copy}}
+          </div>
+        </li>
+        <li>
+          <a href="javascript:;" data-index="4" class="accordion-mobile-button">Warranty</a>
+          <div class="accordion-mobile-content">
+            {{product.metafields.warranty.copy}}
+          </div>
+        </li>
+        <li>
+          <a href="javascript:;" data-index="5" class="accordion-mobile-button">Payment</a>
+          <div class="accordion-mobile-content">
+            {{product.metafields.payment.copy}}
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
 
@@ -49,6 +83,21 @@
       $this.addClass('active');
       $('.accordion-content li').hide();
       content.show();
+    });
+
+    function _hideAccordionContent() {
+      $('.accordion-mobile li .accordion-mobile-content').hide();
+      $('.accordion-mobile li.active .accordion-mobile-content').show();
+    };
+    _hideAccordionContent();
+
+    $('.accordion-mobile-button').on('click', function() {
+      var $this = $(this);
+      $('.accordion-mobile li.active .accordion-mobile-content').slideUp();
+      $('.accordion-mobile li.active').removeClass('active');
+      $this.parent().addClass('active');
+      var content = $this.next('.accordion-mobile-content');
+      content.slideDown();
     });
   });
 </script>
