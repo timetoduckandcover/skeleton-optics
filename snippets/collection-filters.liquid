@@ -12,6 +12,7 @@
           <a href="javascript:;" class="sprite filter_list"></a>
         </div>
         <select class="collection-paginate" name="">
+          <option value="all">All Products</option>
           <option value="3">3 products per page</option>
           <option value="6">6 products per page</option>
           <option value="9">9 products per page</option>
@@ -143,8 +144,18 @@
 
     $('.collection-paginate').on('change', function() {
       var items = $(this).val();
-      localStorage.setItem('items_per_page', items);
-      _setPagination();
+      if(items === 'all') {
+        localStorage.removeItem('items_per_page');
+        $('.collection-item').each(function(i) {
+          var $this = $(this);
+          $this.show();
+        });
+        var totalCount = Number($('.products-total').val());
+        $('.products-displayed').text(totalCount);
+      } else {
+        localStorage.setItem('items_per_page', items);
+        _setPagination();
+      }
     });
 
     function _setPagination() {
