@@ -1201,9 +1201,31 @@ main.global-site {
 
 
 /* CART */
+.cart-headers {
+  display: none;
+  @include breakpoint(medium) {
+    display: block;
+  }
+}
 .cart-labels {
   li {
     text-transform: uppercase;
+  }
+}
+.cart-grid-item {
+  text-align: center;
+  margin-bottom: 14px;
+  @include breakpoint(medium) {
+    text-align: left;
+    margin-bottom: 0;
+  }
+  .product-qty-selector {
+    width: 132px;
+    margin: 0 auto;
+    @include breakpoint(medium) {
+      width: auto;
+      margin: 0 12px 0 0;
+    }
   }
 }
 .cart-meta {
