@@ -455,8 +455,8 @@ select {
 
 
 /* SLIDER */
-.flex-direction-nav a.flex-prev  { background-image:url({{ 'leftarrow.png' | asset_url }}); display: block; text-indent: -999999px}
-.flex-direction-nav a.flex-next  { background-image:url({{ 'rightarrow.png' | asset_url }}); display:block; text-indent: 999999px}
+.flex-direction-nav a.flex-prev  { background-image:url(//cdn.shopify.com/s/files/1/1201/2432/t/4/assets/leftarrow.png?15968358024461598628); display: block; text-indent: -999999px}
+.flex-direction-nav a.flex-next  { background-image:url(//cdn.shopify.com/s/files/1/1201/2432/t/4/assets/rightarrow.png?15968358024461598628); display:block; text-indent: 999999px}
 
 /* HEADER */
 header.global-header {

@@ -18,7 +18,7 @@
         <h1 class="uppercase"></h1>
         <div id="product-description" class="rte" itemprop="description">
           <span class="block uppercase product-label">Quick Overview</span>
-          {{ product.description }}
+          {{product.metafields.description.copy}}
         </div>
         <div class="product-variants">
           <!-- <span class="block uppercase product-label">Select Frame</span>
@@ -94,7 +94,7 @@
           </ul>
           <ul class="accordion-content">
             <li data-index="1">
-              {{product.metafields.description.copy}}
+              {{ product.description }}
             </li>
             <li data-index="2">
               <div id="shopify-product-reviews" data-id="{{ product.id }}">{{ product.metafields.spr.reviews }}</div>
