@@ -1,0 +1,54 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="product-accordion">
+      <ul class="accordion-headers">
+        <li>
+          <a href="javascript:;" data-index="1" class="active">Description</a>
+        </li>
+        <li>
+          <a href="javascript:;" data-index="2">Customer Review</a>
+        </li>
+        <li>
+          <a href="javascript:;" data-index="3">Delivery</a>
+        </li>
+        <li>
+          <a href="javascript:;" data-index="4">Warranty</a>
+        </li>
+        <li>
+          <a href="javascript:;" data-index="5">Payment</a>
+        </li>
+      </ul>
+      <ul class="accordion-content">
+        <li data-index="1">
+          {{ product.description }}
+        </li>
+        <li data-index="2">
+          <div id="shopify-product-reviews" data-id="{{ product.id }}">{{ product.metafields.spr.reviews }}</div>
+        </li>
+        <li data-index="3">
+          {{product.metafields.delivery.copy}}
+        </li>
+        <li data-index="4">
+          {{product.metafields.warranty.copy}}
+        </li>
+        <li data-index="5">
+          {{product.metafields.payment.copy}}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  jQuery(document).ready(function($) {
+    $('.accordion-headers li a').on('click', function() {
+      var $this = $(this);
+      var clickIndex = $this.attr('data-index');
+      var content = $('.accordion-content li[data-index="' + clickIndex + '"]');
+      $('.accordion-headers li a').removeClass('active');
+      $this.addClass('active');
+      $('.accordion-content li').hide();
+      content.show();
+    });
+  });
+</script>
