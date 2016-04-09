@@ -884,6 +884,12 @@ main.global-site {
 }
 .collection-listing {
   .collection-item {
+    margin-bottom: 20px;
+    &.col-md-4 {
+      &:nth-child(3n+4) {
+        clear: left;
+      }
+    }
     &.filter_grid {
       .prod-image-wrap {
         img {

@@ -19,11 +19,11 @@
           <option value="12">12 products per page</option>
         </select>
         <select class="collection-sort" name="">
-          <option value="" disabled selected>Sort By</option>    
+          <option value="" disabled>Sort By</option>
+          <option value="popular" selected="selected">Most Popular</option>
           <option value="az">A-Z</option>
           <option value="price-asc">Price Ascending</option>
           <option value="price-desc">Price Descending</option>
-          <option value="popular">Most Popular</option>
         </select>
       </div>
     </div>
@@ -224,5 +224,52 @@
       }
     };
     _setCollectionLayoutStyle();
+
+    // Event handler for collection sorting dropdown
+    $('.collection-sort').on('change', function() {
+      var $this = $(this);
+      var val = $this.val();
+      var items = $('.collection-item');
+      switch(val) {
+        case 'az':
+          _sortByAZ(items);
+          break;
+        case 'price-asc':
+          _sortByPriceAsc(items);
+          break;
+        case 'price-desc':
+          _sortByPriceDesc(items);
+          break;
+        case 'popular':
+          _sortByPopular(items);
+          break;
+      };
+    });
+
+    function _sortByAZ(items) {
+      var alphabeticallyOrderedDivs = items.sort(function(a,b){
+        return $(a).find("h2").text() > $(b).find("h2").text();
+      });
+      $(".collection-listing").html(alphabeticallyOrderedDivs);
+    };
+
+    function _sortByPriceAsc(items) {
+      items.sort(function (a, b) {
+        return $(a).find(".main-price .money").attr('data-amount') - $(b).find(".main-price .money").attr('data-amount');
+      }).appendTo($(".collection-listing"));
+    };
+
+    function _sortByPriceDesc(items) {
+      items.sort(function (a, b) {
+        return $(b).find(".main-price .money").attr('data-amount') - $(a).find(".main-price .money").attr('data-amount');
+      }).appendTo($(".collection-listing"));
+    };
+
+    function _sortByPopular(items) {
+      items.sort(function(a, b) {
+        return +a.dataset.index - +b.dataset.index;
+      }).appendTo($(".collection-listing"));
+    };
+
   });
 </script>

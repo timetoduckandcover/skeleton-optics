@@ -20,7 +20,7 @@ Here, for the sake of teaching, we will use 2 presentation options:
   {% assign on_sale = true %}
 {% endif %}
 
-<div class="col-xs-12 collection-item {{ product-grid-item }}{% unless product.available %} sold-out{% endunless %}{% if on_sale %} on-sale{% endif %}{% if product-grid-item == 'four-per-row' %}{% cycle 'last': '', '', '', ' last-in-row' %}{% elsif product-grid-item == 'three-per-row' %}{% cycle 'last': '', '', ' last-in-row' %}{% endif %}">
+<div data-index="{{forloop.index}}" class="col-xs-12 collection-item {{ product-grid-item }}{% unless product.available %} sold-out{% endunless %}{% if on_sale %} on-sale{% endif %}{% if product-grid-item == 'four-per-row' %}{% cycle 'last': '', '', '', ' last-in-row' %}{% elsif product-grid-item == 'three-per-row' %}{% cycle 'last': '', '', ' last-in-row' %}{% endif %}">
   <div class="prod-image-wrap">
     <a href="{{ product.url | within: collection }}" class="block">
       <img src="{{ product.featured_image.src | product_img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}" />
@@ -40,7 +40,7 @@ Here, for the sake of teaching, we will use 2 presentation options:
       <!-- </a> -->
     </h2>
     <span class="prod-price text-center lato-thin">
-      <span class="text-center">{{ product.price | money }}</span>
+      <span class="text-center main-price">{{ product.price | money }}</span>
       {% if on_sale %}
       <s class="compare-at-price">{{ product.compare_at_price | money }}</s>
       {% endif %}
