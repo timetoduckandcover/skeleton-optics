@@ -749,9 +749,11 @@ main.global-site {
     .filters-header-inner {
       @extend .cf;
       .filters-header-toggle {
-        @include breakpoint(large) {
+        margin-bottom: 12px;
+        @include breakpoint(medium) {
           float: left;
           height: 44px;
+          margin-bottom: 0;
         }
         a {
           display: inline-block;
@@ -767,8 +769,7 @@ main.global-site {
       }
       .filters-header-options {
         @extend .cf;
-        float: right;
-        @include breakpoint(large) {
+        @include breakpoint(medium) {
           float: right;
         }
         .filters-switch-view {
@@ -886,8 +887,18 @@ main.global-site {
   .collection-item {
     margin-bottom: 20px;
     &.col-md-4 {
-      &:nth-child(3n+4) {
-        clear: left;
+      @include breakpoint(medium) {
+        &:nth-child(2n+3) {
+          clear: left;
+        }
+      }
+      @include breakpoint(large) {
+        &:nth-child(2n+3) {
+          clear: none;
+        }
+        &:nth-child(3n+4) {
+          clear: left;
+        }
       }
     }
     &.filter_grid {
